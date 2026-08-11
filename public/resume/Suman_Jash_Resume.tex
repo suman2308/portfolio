@@ -1,0 +1,228 @@
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\input{glyphtounicode}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\textwidth}{1.2in}
+\addtolength{\topmargin}{-0.85in}
+\addtolength{\textheight}{1.75in}
+
+\urlstyle{same}
+\setlength{\tabcolsep}{0in}
+\pdfgentounicode=1
+\raggedbottom
+\emergencystretch=2em
+
+%----------SECTION FORMAT----------
+\titleformat{\section}
+{\vspace{-6pt}\scshape\raggedright\large}
+{}{0em}{}
+[\color{black}\titlerule \vspace{-6pt}]
+
+%----------RESUME COMMANDS----------
+\newcommand{\resumeItem}[1]{
+\item{#1 \vspace{1pt}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{1pt}\item
+\begin{tabular*}{\linewidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+\textbf{#1} & #2 \\
+\textit{#3} & \textit{#4} \\
+\end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeProjectHeading}[1]{
+\item #1\par\vspace{-2pt}
+}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+%----------DOCUMENT----------
+\begin{document}
+
+\pagestyle{empty}
+
+%----------HEADER----------
+\begin{center}
+{\Huge \bfseries Suman Jash}\\[-1pt]
+\vspace{2pt}
+
++91 9593428292 $|$
+\href{mailto:iamsumanjash@gmail.com}{iamsumanjash@gmail.com} $|$
+\href{https://www.linkedin.com/in/sumanjash}{LinkedIn} $|$
+\href{https://github.com/suman2308}{GitHub} $|$
+\href{https://codeforces.com/profile/sumanjash}{Codeforces} $|$
+\href{https://www.codechef.com/users/suman23082005}{CodeChef}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+
+Computer Science Engineering student with hands-on experience designing, building, and deploying full-stack, backend, and machine learning applications using Python, Flask, PHP, SQL, Docker, and GitHub Actions. Uses AI tools (ChatGPT, Claude, Copilot) to accelerate debugging and learning, while independently owning system design, testing, and architecture decisions. Codeforces Pupil and CodeChef 3-Star with 600+ problems solved.
+
+
+%-----------EDUCATION-----------
+\section{Education}
+
+\begin{itemize}[
+leftmargin=0.13in,
+label={},
+itemsep=1pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\resumeSubheading
+{Narula Institute of Technology}{2023 -- 2027}
+{B.Tech in Computer Science and Engineering, CGPA: 8.96/10}
+{Kolkata, West Bengal}
+
+\resumeSubheading
+{Arambagh Vivekananda Academy}{2021 -- 2023}
+{CBSE Class XII -- 85.8\% $|$ CBSE Class X -- 94.4\%}
+{Arambagh, Hooghly}
+
+\end{itemize}
+\vspace{-8pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+
+\begin{itemize}[
+leftmargin=0.18in,
+itemsep=2pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+%----------COURIER AI----------
+\resumeProjectHeading{
+\textbf{CourierAI -- ML-Powered Delivery Time Prediction Platform}
+$|$ \textit{Python, Flask, scikit-learn, SQLite, Docker}
+}
+
+\vspace{1pt}
+
+\href{https://github.com/suman2308/smart-delivery-prediction}{GitHub}
+$|$
+\href{https://smart-delivery-prediction.onrender.com/}{Live Demo}
+
+\vspace{1pt}
+
+\begin{itemize}[
+leftmargin=0.2in,
+itemsep=0pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\resumeItem{Trained and tuned a HistGradientBoostingRegressor on 49,639 real DTDC courier records using randomized search over 150 of 960 configurations with 5-fold cross-validation; achieved 0.5361-day holdout MAE and 0.7466 $R^2$.}
+
+\resumeItem{Built an experiment harness comparing Random Forest, XGBoost, CatBoost, SVR/SVC, and MLP models plus voting/stacking hybrids, including up to 17 stacking combinations for regression and classification.}
+
+\resumeItem{Developed a secured REST API (\texttt{/api/predict}) with SHA-256-hashed and Fernet-encrypted API keys, 30 requests/minute and 1000 requests/day limits, and plan-based prediction quotas.}
+
+\resumeItem{Implemented user authentication with scrypt password hashing, CSRF protection, security headers, and a standalone admin console for users, plans, analytics, and system/ML status.}
+
+\resumeItem{Containerized the application with Docker and Docker Compose, added GitHub Actions CI with pytest, and deployed the production service to Render with Gunicorn.}
+
+\resumeItem{Used AI coding assistants (ChatGPT, Claude, Copilot) to accelerate debugging and understand unfamiliar ML/statistical concepts during model experimentation, while independently owning model selection, security architecture, and API design.}
+
+\end{itemize}
+
+%----------AEROBOOK----------
+\resumeProjectHeading{
+\textbf{AeroBook -- Airline Reservation \& Flight Operations Platform}
+$|$ \textit{PHP 8, MySQL, Bootstrap 5, JavaScript, Docker}
+}
+
+\vspace{1pt}
+
+\href{https://github.com/suman2308/airline-reservation-system}{GitHub}
+$|$
+\href{https://aerobook-2snu.onrender.com/}{Live Demo}
+
+\vspace{1pt}
+
+\begin{itemize}[
+leftmargin=0.2in,
+itemsep=1pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\resumeItem{Built a full-stack airline reservation platform spanning 24 passenger-facing pages and a 16-page admin Operations Center, covering flight search, booking, check-in, and account management.}
+
+\resumeItem{Designed a Smart Fare Engine that discovers valid connecting itineraries (90-minute to 8-hour layovers, single connection) alongside direct flights, scoring each on price, travel time, layover length, and stop count to surface Best Value/Cheapest/Fastest options.}
+
+\resumeItem{Built an interactive 2D seat map with multi-passenger booking (1-6 passengers), baggage/meal add-ons, promo code discounts, and QR-coded e-tickets with calendar export.}
+
+\resumeItem{Built an admin analytics suite covering revenue, occupancy, and route reports with CSV exports, a searchable audit trail, and automated data-quality diagnostics; integrated optional live flight/airport data sync from the AviationStack API.}
+
+\resumeItem{Hardened the app with prepared statements, CSRF protection, bcrypt password hashing, and login lockout tracking; wrote a dependency-free smoke-test suite and containerized deployment with Docker.}
+
+\end{itemize}
+
+\end{itemize}
+\vspace{-8pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+
+\begin{itemize}[
+leftmargin=0.13in,
+label={},
+itemsep=0pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\item{
+\textbf{Languages:} C/C++, Python, PHP, Java, JavaScript, SQL, HTML, CSS \\[2pt]
+\textbf{Frameworks \& Libraries:} Flask, scikit-learn, Pandas, NumPy, XGBoost, CatBoost, Bootstrap 5 \\[2pt]
+\textbf{Databases:} MySQL, SQLite \\[2pt]
+\textbf{Developer Tools:} Git, GitHub, GitHub Actions, Docker, Docker Compose, pytest, VS Code, XAMPP \\[2pt]
+\textbf{Deployment:} Render, InfinityFree \\[2pt]
+\textbf{Core Concepts:} Data Structures \& Algorithms, OOP, Operating Systems, Computer Networks, DBMS, Machine Learning, REST APIs, Authentication, Web Security, CI, Deployment
+}
+
+\end{itemize}
+\vspace{-8pt}
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements}
+
+\begin{itemize}[
+leftmargin=0.18in,
+itemsep=2pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\resumeItem{Secured 2\textsuperscript{nd} rank in \textit{Code It}, a college-level duo-format coding competition with 40 teams competing in the final round.}
+
+\resumeItem{Co-designed a School ERP System concept for Smart India Hackathon (SIH); owned system design, QA/testing, and delivered the final presentation after the idea was selected for the college-level demonstration round.}
+
+\resumeItem{Codeforces Pupil (max rating 1327) $|$ CodeChef 3-Star (max rating 1628) $|$ 600+ problems solved across LeetCode, CodeChef, and Codeforces.}
+
+\resumeItem{Programming in Java (Elite) -- NPTEL, Score: 94/100 $|$ Cloud Computing -- NPTEL, Score: 92/100}
+
+\end{itemize}
+
+\end{document}

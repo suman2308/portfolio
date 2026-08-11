@@ -1,0 +1,36 @@
+{
+  "name": "suman-jash-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "description": "Personal portfolio for Suman Jash — Software Engineer · Full-Stack Developer · AI/ML",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node scripts/fetch-cp-stats.mjs",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "cp-stats": "node scripts/fetch-cp-stats.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.7.0",
+    "@types/three": "^0.185.4",
+    "lucide-react": "^1.31.0",
+    "motion": "^13.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  }
+}

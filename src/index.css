@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #0b0806;
+  --color-ink-2: #110c07;
+  --color-panel: #17100a;
+  --color-surface: #1e150c;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-fg: #f5eddf;
+  --color-muted: #b4a48f;
+  --color-faint: #75664f;
+  --color-accent: #ff7a1a;
+  --color-accent-bright: #ffab5e;
+  --color-accent-deep: #d95c04;
+  --color-amber: #ffc46b;
+  --color-ok: #34d399;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
+  --animate-scroll-dot: scroll-dot 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-spin-slow: spin 26s linear infinite;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes scroll-dot {
+  0% { transform: translateY(-110%); }
+  55%, 100% { transform: translateY(110%); }
+}
+@keyframes word-cycle {
+  0%, 16% { opacity: 0; transform: translateY(10px); }
+  30%, 74% { opacity: 1; transform: translateY(0); }
+  88%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-accent text-ink;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0806;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #33251a;
+    border-radius: 8px;
+    border: 2px solid #0b0806;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a3525;
+  }
+}
+
+/* ---------- display text helpers ---------- */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(236 236 242 / 0.6);
+}
+.text-stroke-thin {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(236 236 242 / 0.3);
+}
+.text-stroke-faint {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(236 236 242 / 0.14);
+}
+
+/* ---------- film grain (very subtle) ---------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ---------- marquee ---------- */
+.marquee-track {
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- hero side-word cycle ---------- */
+.word-cycle {
+  animation: word-cycle 4.8s ease-in-out infinite;
+}
+
+/* ---------- skip link ---------- */
+.skip-link {
+  @apply fixed left-4 top-4 z-[90] -translate-y-24 rounded-full border border-line bg-panel px-4 py-2 text-sm font-medium text-fg transition-transform duration-300;
+}
+.skip-link:focus {
+  @apply translate-y-0;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
