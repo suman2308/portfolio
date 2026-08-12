@@ -44,6 +44,7 @@ export function SectionHeading({
   description,
   center = false,
   delay = 0.1,
+  note,
 }: {
   index: string;
   eyebrow: string;
@@ -55,6 +56,8 @@ export function SectionHeading({
   center?: boolean;
   /** Delay before the title starts folding (seconds). */
   delay?: number;
+  /** Small mono annotation on the right — an authored detail on wide screens. */
+  note?: string;
 }) {
   return (
     <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
@@ -76,6 +79,14 @@ export function SectionHeading({
       {description && (
         <Reveal delay={0.16}>
           <div className="mt-5 max-w-xl leading-relaxed text-muted">{description}</div>
+        </Reveal>
+      )}
+      {note && (
+        <Reveal delay={0.2}>
+          <p className="mt-6 hidden items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-faint lg:flex">
+            <span className="text-accent/70">//</span>
+            {note}
+          </p>
         </Reveal>
       )}
     </div>

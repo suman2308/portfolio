@@ -2,6 +2,7 @@ import { Code2, Database, Layers, LayoutDashboard, Rocket, Server, Sparkles, Squ
 import type { LucideIcon } from "lucide-react";
 import { skills } from "../data/portfolio";
 import { Container, Reveal, SectionHeading } from "../components/ui";
+import { CharacterHead } from "../components/character/Character";
 
 const ICONS: Record<string, LucideIcon> = {
   code: Code2,
@@ -18,13 +19,24 @@ export function Skills() {
   return (
     <section id="skills" className="relative py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          index="03"
-          eyebrow="Skills"
-          title="The stack I reach for, organized."
-          highlight="organized"
-          description="A snapshot of the technologies I work with across the full stack — from databases to models."
-        />
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading
+            index="03"
+            eyebrow="Skills"
+            title="The tools I work with, by layer."
+            highlight="layer"
+            description="A snapshot of the technologies I work with across the full stack — from databases to models."
+          />
+          <Reveal delay={0.12}>
+            <div className="mb-2 hidden items-center gap-3 lg:flex" aria-hidden="true">
+              <CharacterHead className="h-11 w-11" />
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint">// the toolbelt</p>
+                <p className="font-serif text-sm italic text-accent-bright">reached for daily</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((group, i) => {

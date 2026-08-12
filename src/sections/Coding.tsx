@@ -2,6 +2,50 @@ import { ArrowUpRight } from "lucide-react";
 import { codingIntro, platforms, type Platform } from "../data/portfolio";
 import { Container, Reveal, SectionHeading } from "../components/ui";
 import { BRAND_ICONS } from "../components/icons";
+import { Character } from "../components/character/Character";
+
+function TerminalScene() {
+  return (
+    <Reveal delay={0.12}>
+      <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center">
+        <Character pose="laptop" className="w-24 shrink-0 sm:w-28" />
+        <div className="w-full min-w-0 flex-1 overflow-hidden rounded-2xl border border-line bg-panel shadow-[0_30px_80px_-50px_rgba(0,0,0,0.9)]">
+          {/* window chrome */}
+          <div className="flex items-center gap-2 border-b border-line/60 bg-ink/40 px-4 py-2.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" aria-hidden="true" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" aria-hidden="true" />
+            <span className="ml-3 font-mono text-[10px] tracking-[0.15em] text-faint">solve.py</span>
+          </div>
+          <pre className="overflow-x-auto px-4 py-4 font-mono text-[11px] leading-[1.9]">
+            <code>
+              <span className="text-faint"># keeping the edge sharp</span>
+              {"\n"}
+              <span className="text-accent-bright">def</span> <span className="text-fg">sharpen</span>():
+              {"\n"}
+              {"    "}
+              <span className="text-accent-bright">for</span> p <span className="text-accent-bright">in</span> (
+              <span className="text-fg">codeforces</span>, <span className="text-fg">codechef</span>, <span className="text-fg">leetcode</span>):
+              {"\n"}
+              {"        "}platform.practice(problem=<span className="text-fg">"daily"</span>)
+              {"\n"}
+              {"    "}rating, rank = grind()
+              {"\n"}
+              {"    "}
+              <span className="text-accent-bright">return</span> rating + <span className="text-fg">" · "</span> + rank
+              {"\n"}
+              {"\n"}
+              <span className="text-faint"># 600+ solved — and counting</span>
+              {"\n"}
+              <span className="text-faint"># numbers pulled live at build time</span>
+              <span className="ml-1 inline-block h-3.5 w-2 translate-y-0.5 animate-blink bg-accent" aria-hidden="true" />
+            </code>
+          </pre>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
 
 function PlatformCard({ platform, index }: { platform: Platform; index: number }) {
   const Icon = BRAND_ICONS[platform.icon] ?? BRAND_ICONS.github;
@@ -51,13 +95,17 @@ export function Coding() {
   return (
     <section id="coding" className="relative py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          index="04"
-          eyebrow="Competitive Programming"
-          title="Where I keep my edge sharp."
-          highlight="edge"
-          description={codingIntro}
-        />
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_460px]">
+          <SectionHeading
+            index="04"
+            eyebrow="Competitive Programming"
+            title="Where I keep my edge sharp."
+            highlight="edge"
+            description={codingIntro}
+            note="real numbers, pulled live at build time"
+          />
+          <TerminalScene />
+        </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {platforms.map((platform, i) => (

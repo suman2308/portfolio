@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { profile } from "../data/portfolio";
 import { EASE } from "../lib/anim";
+import { GithubIcon } from "./icons";
 import { Container } from "./ui";
 
 const LINKS = [
@@ -102,6 +103,15 @@ export function Nav() {
             </nav>
 
             <div className="col-start-3 flex items-center gap-3 justify-self-end">
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub profile"
+                className="hidden h-10 w-10 place-items-center rounded-full border border-line bg-panel text-muted transition-colors duration-200 hover:border-accent/50 hover:text-fg lg:grid"
+              >
+                <GithubIcon className="h-4.5 w-4.5" />
+              </a>
               {profile.resumeUrl && (
                 <a
                   href={profile.resumeUrl}
@@ -174,6 +184,16 @@ export function Nav() {
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               )}
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub profile"
+                className="inline-flex items-center gap-1.5 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent/60 hover:text-accent-bright"
+              >
+                <GithubIcon className="h-4 w-4" />
+                GitHub
+              </a>
               <a
                 href={`mailto:${profile.email}`}
                 className="inline-flex items-center gap-2 text-sm text-accent-bright"

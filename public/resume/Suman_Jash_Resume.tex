@@ -13,8 +13,8 @@
 
 \addtolength{\oddsidemargin}{-0.6in}
 \addtolength{\textwidth}{1.2in}
-\addtolength{\topmargin}{-0.85in}
-\addtolength{\textheight}{1.75in}
+\addtolength{\topmargin}{-0.9in}
+\addtolength{\textheight}{1.78in}
 
 \urlstyle{same}
 \setlength{\tabcolsep}{0in}
@@ -55,21 +55,21 @@
 %----------HEADER----------
 \begin{center}
 {\Huge \bfseries Suman Jash}\\[-1pt]
-\vspace{2pt}
+\vspace{1pt}
 
 +91 9593428292 $|$
 \href{mailto:iamsumanjash@gmail.com}{iamsumanjash@gmail.com} $|$
+\href{https://portfolio-solo-e905.vercel.app/}{Portfolio} $|$
 \href{https://www.linkedin.com/in/sumanjash}{LinkedIn} $|$
 \href{https://github.com/suman2308}{GitHub} $|$
-\href{https://codeforces.com/profile/sumanjash}{Codeforces} $|$
-\href{https://www.codechef.com/users/suman23082005}{CodeChef}
+\href{https://codeforces.com/profile/sumanjash}{Codeforces}
 \end{center}
 
 %-----------SUMMARY-----------
 \section{Summary}
 
-Computer Science Engineering student with hands-on experience designing, building, and deploying full-stack, backend, and machine learning applications using Python, Flask, PHP, SQL, Docker, and GitHub Actions. Uses AI tools (ChatGPT, Claude, Copilot) to accelerate debugging and learning, while independently owning system design, testing, and architecture decisions. Codeforces Pupil and CodeChef 3-Star with 600+ problems solved.
-
+Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, Flask, PHP, SQL, Docker, and GitHub Actions. Comfortable owning system design, security architecture, and model evaluation end-to-end; uses AI coding assistants the way a professional engineer does -- to move faster, not to skip understanding. Codeforces Pupil and CodeChef 3-Star with 600+ problems solved.
+\vspace{-4pt}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -94,14 +94,14 @@ partopsep=0pt
 {Arambagh, Hooghly}
 
 \end{itemize}
-\vspace{-8pt}
+\vspace{-10pt}
 
 %-----------PROJECTS-----------
 \section{Projects}
 
 \begin{itemize}[
 leftmargin=0.18in,
-itemsep=2pt,
+itemsep=1pt,
 topsep=0pt,
 parsep=0pt,
 partopsep=0pt
@@ -129,17 +129,15 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Trained and tuned a HistGradientBoostingRegressor on 49,639 real DTDC courier records using randomized search over 150 of 960 configurations with 5-fold cross-validation; achieved 0.5361-day holdout MAE and 0.7466 $R^2$.}
+\resumeItem{Trained a HistGradientBoostingRegressor on 49,639 real DTDC courier records via randomized search over 150/960 configurations with 5-fold CV, reaching 0.5361-day MAE and 0.7466 $R^2$ (CV std $\pm$0.0056, train/test ratio 0.973 -- no overfitting) at $\sim$5.8$\mu$s inference per prediction.}
 
-\resumeItem{Built an experiment harness comparing Random Forest, XGBoost, CatBoost, SVR/SVC, and MLP models plus voting/stacking hybrids, including up to 17 stacking combinations for regression and classification.}
+\resumeItem{Built an experiment harness benchmarking 5 base models (Random Forest, XGBoost, CatBoost, SVR/SVC, MLP) against voting and stacking ensembles across up to 17 combinations, for both regression and classification.}
 
-\resumeItem{Developed a secured REST API (\texttt{/api/predict}) with SHA-256-hashed and Fernet-encrypted API keys, 30 requests/minute and 1000 requests/day limits, and plan-based prediction quotas.}
+\resumeItem{Designed a secured REST API (\texttt{/api/predict}) with SHA-256-hashed and Fernet-encrypted per-user API keys, tiered rate limiting (30/min, 1000/day), and plan-based prediction quotas enforced with HTTP 402 responses.}
 
-\resumeItem{Implemented user authentication with scrypt password hashing, CSRF protection, security headers, and a standalone admin console for users, plans, analytics, and system/ML status.}
+\resumeItem{Implemented scrypt password hashing, CSRF protection, and security headers; built a standalone admin console covering users, plans, analytics, and live system/ML health.}
 
-\resumeItem{Containerized the application with Docker and Docker Compose, added GitHub Actions CI with pytest, and deployed the production service to Render with Gunicorn.}
-
-\resumeItem{Used AI coding assistants (ChatGPT, Claude, Copilot) to accelerate debugging and understand unfamiliar ML/statistical concepts during model experimentation, while independently owning model selection, security architecture, and API design.}
+\resumeItem{Containerized with Docker and Docker Compose, added GitHub Actions CI running pytest, and deployed to Render behind Gunicorn.}
 
 \end{itemize}
 
@@ -165,20 +163,20 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Built a full-stack airline reservation platform spanning 24 passenger-facing pages and a 16-page admin Operations Center, covering flight search, booking, check-in, and account management.}
+\resumeItem{Designed a normalized 24-table MySQL schema (FK constraints, 13 indexes) powering 24 passenger-facing pages and a 16-page admin Operations Center spanning flight search, booking, check-in, and account management.}
 
-\resumeItem{Designed a Smart Fare Engine that discovers valid connecting itineraries (90-minute to 8-hour layovers, single connection) alongside direct flights, scoring each on price, travel time, layover length, and stop count to surface Best Value/Cheapest/Fastest options.}
+\resumeItem{Built a Smart Fare Engine that discovers connecting itineraries (90-minute to 8-hour layovers, single connection) in 3 database queries per search, scoring each on price, duration, layover length, and stop count to surface Best Value/Cheapest/Fastest options.}
 
 \resumeItem{Built an interactive 2D seat map with multi-passenger booking (1-6 passengers), baggage/meal add-ons, promo code discounts, and QR-coded e-tickets with calendar export.}
 
-\resumeItem{Built an admin analytics suite covering revenue, occupancy, and route reports with CSV exports, a searchable audit trail, and automated data-quality diagnostics; integrated optional live flight/airport data sync from the AviationStack API.}
+\resumeItem{Built an admin analytics suite covering revenue, occupancy, and route reports with CSV exports, a searchable audit trail, and automated data-quality diagnostics; integrated live flight/airport data sync from the AviationStack API.}
 
-\resumeItem{Hardened the app with prepared statements, CSRF protection, bcrypt password hashing, and login lockout tracking; wrote a dependency-free smoke-test suite and containerized deployment with Docker.}
-
-\end{itemize}
+\resumeItem{Hardened the app with prepared statements, CSRF protection, bcrypt hashing, and login lockout tracking; wrote a dependency-free smoke-test suite and shipped a containerized deployment with Docker.}
 
 \end{itemize}
-\vspace{-8pt}
+
+\end{itemize}
+\vspace{-10pt}
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
@@ -197,19 +195,19 @@ partopsep=0pt
 \textbf{Frameworks \& Libraries:} Flask, scikit-learn, Pandas, NumPy, XGBoost, CatBoost, Bootstrap 5 \\[2pt]
 \textbf{Databases:} MySQL, SQLite \\[2pt]
 \textbf{Developer Tools:} Git, GitHub, GitHub Actions, Docker, Docker Compose, pytest, VS Code, XAMPP \\[2pt]
-\textbf{Deployment:} Render, InfinityFree \\[2pt]
-\textbf{Core Concepts:} Data Structures \& Algorithms, OOP, Operating Systems, Computer Networks, DBMS, Machine Learning, REST APIs, Authentication, Web Security, CI, Deployment
+\textbf{Deployment:} Render, Vercel, InfinityFree \\[2pt]
+\textbf{Core Concepts:} Data Structures \& Algorithms, OOP, Operating Systems, Computer Networks, DBMS, Machine Learning, REST APIs, Authentication, Web Security, CI/CD
 }
 
 \end{itemize}
-\vspace{-8pt}
+\vspace{-10pt}
 
 %-----------ACHIEVEMENTS-----------
 \section{Achievements}
 
 \begin{itemize}[
 leftmargin=0.18in,
-itemsep=2pt,
+itemsep=1pt,
 topsep=0pt,
 parsep=0pt,
 partopsep=0pt
@@ -221,7 +219,25 @@ partopsep=0pt
 
 \resumeItem{Codeforces Pupil (max rating 1327) $|$ CodeChef 3-Star (max rating 1628) $|$ 600+ problems solved across LeetCode, CodeChef, and Codeforces.}
 
+\end{itemize}
+\vspace{-8pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+
+\begin{itemize}[
+leftmargin=0.18in,
+itemsep=0pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
 \resumeItem{Programming in Java (Elite) -- NPTEL, Score: 94/100 $|$ Cloud Computing -- NPTEL, Score: 92/100}
+
+\resumeItem{Generative AI \& Python Programming (30 hrs each) -- Ardent Computech Pvt. Ltd.}
+
+\resumeItem{Prompt Engineering for AI \& AI Automation and Deployment -- Eduskill (Virtual Internship)}
 
 \end{itemize}
 

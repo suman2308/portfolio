@@ -1,16 +1,18 @@
-# Images & Documents — where everything lives
+# Images — where everything lives
 
 The site ships everything from `public/`. Current layout:
 
 ```
 public/
-├── images/                              # photos
-│   ├── hero.jpg                         # Hero portrait (lanyard card front face)
-│   ├── project-courierai.png            # CourierAI landing-page screenshot (from the repo README)
-│   └── project-aerobook.png             # AeroBook landing-page screenshot (from the repo README)
+├── images/                              # optimized images actually used by the site
+│   ├── hero.webp                        # Hero portrait (lanyard card front face) — WebP
+│   ├── og.jpg                           # 1200×630 Open-Graph share image
+│   ├── project-courierai.webp           # CourierAI landing-page screenshot (from the repo README)
+│   └── project-aerobook.webp            # AeroBook landing-page screenshot (from the repo README)
 ├── resume/
 │   ├── Suman_Jash_Resume.pdf            # compiled from Suman_Jash_Resume.tex (see README.md)
 │   └── Suman_Jash_Resume.tex            # LaTeX source of the resume
+├── robots.txt                           # allows all crawlers
 └── certificates/                        # all certificates, named by content
     ├── NPTEL_Programming_In_Java_Elite.pdf
     ├── NPTEL_Cloud_Computing.pdf
@@ -20,6 +22,30 @@ public/
     ├── Generative_AI_Training_Ardent.pdf              # Ardent, ID ARDENT/192400
     └── MEAN_Full_Stack_Training_IALSD.pdf
 ```
+
+## Originals
+
+The un-compressed sources live in `/originals` at the project root (outside
+`public/`, so they never ship in the build):
+
+```
+originals/
+├── hero.jpg                    # original portrait
+├── project-courierai.png       # original screenshot
+└── project-aerobook.png        # original screenshot
+```
+
+Conversion history (done with `sharp`, ad hoc — no dependency added):
+
+| File | Before | After (WebP) |
+|---|---|---|
+| hero.jpg | 390 KB | 131 KB |
+| project-courierai.png | 197 KB | 35 KB |
+| project-aerobook.png | 259 KB | 26 KB |
+
+All conversions preserve the original dimensions (hero stays 3:4, screenshots
+stay 1440×900) with a mean pixel difference under 1.6/255 — visually lossless.
+`og.jpg` (1200×630) is a cover crop of `hero.jpg` used for link shares.
 
 > The SIH participation certificate was removed from the site on request; the
 > SIH achievement itself still appears in the About → Highlights list.
@@ -33,22 +59,6 @@ character instead of the photo.
 > The mockup you shared is a full-page design (character + text baked together),
 > so it can't be cut out cleanly. Generate a **character-only** image and drop it
 > in as `public/images/character.png`.
-
-### Prompt to regenerate the character (fixes the "too young" look)
-
-Paste this into ChatGPT (attach your photo as the reference) and tweak as you like:
-
-> Create a premium 3D-anime hybrid portrait (Pixar/Arcane-quality) of a
-> **22-year-old Indian software engineer**, Suman Jash, based on the attached
-> reference photo. He must look like a **mature young professional — definitely
-> an adult, not a teenager or child**: strong defined jawline, calm confident
-> expression, subtle smile, neatly styled dark hair, and facial features that
-> are clearly **recognizable from the reference photo** (same face shape, eyes,
-> skin tone, hair). Dress him in smart casual developer wear (dark shirt or
-> hoodie). Style: cinematic studio lighting, dark charcoal background with a
-> soft violet rim light, centered **bust/waist-up** composition, **clean
-> background — no text, no watermarks, no UI elements**. Professional and
-> impressive, not cute.
 
 Notes:
 

@@ -505,7 +505,7 @@ function LanyardRig({
 
 export function Lanyard({
   gravity = [0, -40, 0],
-  frontImage = "/images/hero.jpg",
+  frontImage = "/images/hero.webp",
   backImage,
   className = "",
   style,

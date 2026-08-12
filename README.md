@@ -21,10 +21,10 @@ npm run typecheck
 
 - `profile` — name, roles, tagline, location, email, resume link, links, bio, focus areas, achievements
 - `profile.educationList` — school, degree, years and location for the Education block in About
-- `heroImage` — path to your portrait in `public/images/` (e.g. `/images/hero.jpg`)
+- `heroImage` — path to your portrait in `public/images/` (e.g. `/images/hero.webp`; the original JPG/PNG sources live in `/originals`)
 - `stats` — experience, projects, problems solved, certifications (strings render as-is)
 - `heroMarquee` / `heroChips` — marquee words and floating chips in the Hero
-- `projects` — your 2 main projects (title, description, features, tech, GitHub/demo links, image)
+- `projects` — your 2 main projects, structured as case studies: `tagline`, `problem`, `result`, `features`, `tech`, `github`/`demo` links, `domain` (shown in the browser-frame URL bar), `ai` (shows the AI/ML core badge) and `image`
 - `skills` — categorized skill groups
 - `platforms` — competitive programming profiles (handle, URL). **The stats come from `cp-live.ts`**, which is regenerated from the live sources on every build — see below.
 - `certifications` — certificates with issuer, year and verification URL
@@ -58,6 +58,7 @@ cp resume-xetex.pdf ../../public/resume/Suman_Jash_Resume.pdf
 ```
 src/
   components/   Nav, Hero, Marquee, icons, shared UI primitives
+  components/character/  Character.tsx — the site's illustrated signature (poses + CharacterHead cameo)
   components/effects/  LightFall, SplashCursor, SplitText, FoldText (canvas + text animation)
   components/effects/Lanyard.tsx  3D swinging ID card (three.js / react-three-fiber, lazy-loaded)
   sections/     About, Projects, Skills, Coding, Certifications, Connect
@@ -70,6 +71,8 @@ scripts/        fetch-cp-stats.mjs — build-time live CP stats fetcher
 ## Deploying to GitHub Pages
 
 The build is a plain static site — `npm run build` outputs to `dist/` and it can be hosted anywhere (GitHub Pages, Netlify, Render, Vercel).
+
+> The production site URL lives in `index.html` (canonical, Open Graph/Twitter image URLs, and the JSON-LD Person schema). It's currently `https://portfolio-solo-e905.vercel.app/` — update all references there if the domain changes.
 
 For a **project page** (`username.github.io/repo/`), set the base path first:
 
@@ -87,10 +90,24 @@ npx vite build --base=/repo-name/
 - Public assets (resume, certificates, project screenshots) contain only public information already shared on LinkedIn/GitHub.
 - `.gitignore` covers `node_modules`, `dist`, `.tooling`, `.env*`, and editor files — secrets can't be committed accidentally.
 
+## Character & visual identity
+
+The portfolio has an original illustrated **character** (`src/components/character/Character.tsx`) — a smart, young, cool version of Suman in **black wayfarer sunglasses**, with a styled haircut that frames the face, a youthful angular jaw, a relaxed confident mouth, a light-blue shirt and an understated ID card on a lanyard that echoes the Hero's hanging card. The face is the identity and stays pixel-identical everywhere; only the pose changes:
+
+- **Hero** — a small `CharacterHead` peeks beside the hanging ID card
+- **About** — the character's first full appearance: relaxed, arms crossed, over a `> whoami` terminal card
+- **Projects** — every case study is stamped "Signed & shipped" with the character head
+- **Coding** — the character sits at a `solve.py` terminal scene, focused over a laptop
+- **Skills** — a small "the toolbelt" cameo
+- **Connect** — a natural farewell wave
+
+Three poses are available (`relaxed`, `laptop`, `wave`) via the `pose` prop; `CharacterHead` is the head-only cameo. Both honor `prefers-reduced-motion` (the gentle bob stops). The favicon is the character's face with the black sunglasses.
+
 ## Design notes
 
 - Dark, minimal, technical aesthetic — warm ember-orange accent with amber/cream supports, editorial serif italic touches, film grain, hairline grid.
-- Scroll-driven Hero: layered typography (split-character entrance), a 3D **lanyard ID card** (photo front, branded back, striped band, pendulum physics + cursor sway) built with three.js and react-three-fiber and lazy-loaded into its own chunk, LightFall streak background, cycling side words, marquee.
+- Scroll-driven Hero: layered typography (split-character entrance), a 3D **lanyard ID card** (photo front, branded back, striped band, pendulum physics + cursor sway) built with three.js and react-three-fiber and lazy-loaded into its own chunk, LightFall streak background, cycling side words, marquee, and the character peek.
+- Projects are **case studies**: each card carries PROBLEM → HIGHLIGHTS → RESULT blocks inside a browser-frame preview, an AI/ML badge where relevant, and the character's signature.
 - Cursor: warm ember trail (**SplashCursor**) with a hue range from orange to gold.
 - Custom canvas effects: **LightFall** (falling light streaks in the Hero) and **SplashCursor** (ember trail following the pointer) — both disabled on touch devices.
 - Text animation: **SplitText** (character stagger) in the Hero, **FoldText** (3D paper-unfold with crease shading) for every section heading.

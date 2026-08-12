@@ -13,7 +13,8 @@
   --color-line-strong: rgb(255 255 255 / 0.16);
   --color-fg: #f5eddf;
   --color-muted: #b4a48f;
-  --color-faint: #75664f;
+  /* faint: #8f7d64 reaches ~5:1 on ink and ~4.7:1 on panel (WCAG AA for small text) */
+  --color-faint: #8f7d64;
   --color-accent: #ff7a1a;
   --color-accent-bright: #ffab5e;
   --color-accent-deep: #d95c04;
@@ -25,6 +26,7 @@
   --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
   --animate-scroll-dot: scroll-dot 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   --animate-spin-slow: spin 26s linear infinite;
+  --animate-blink: blink 1.1s step-end infinite;
 }
 
 /* ---------- keyframes ---------- */
@@ -48,6 +50,14 @@
   0%, 16% { opacity: 0; transform: translateY(10px); }
   30%, 74% { opacity: 1; transform: translateY(0); }
   88%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+@keyframes char-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-0.6deg); }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 @layer base {
@@ -118,6 +128,12 @@
 /* ---------- hero side-word cycle ---------- */
 .word-cycle {
   animation: word-cycle 4.8s ease-in-out infinite;
+}
+
+/* ---------- character bob (editorial, subtle) ---------- */
+.char-bob {
+  animation: char-bob 6.5s ease-in-out infinite;
+  transform-origin: 50% 92%;
 }
 
 /* ---------- skip link ---------- */

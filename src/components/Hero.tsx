@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { heroChips, heroMarquee, profile } from "../data/portfolio";
 import { EASE } from "../lib/anim";
+import { CharacterHead } from "./character/Character";
 import { Marquee } from "./Marquee";
 import { LightFall } from "./effects/LightFall";
 import { SplitText } from "./effects/SplitText";
@@ -19,6 +20,9 @@ const Lanyard = lazy(() => import("./effects/Lanyard").then((m) => ({ default: m
 
 const SIDE_LEFT = ["Full-Stack", "Backend", "AI / ML"];
 const SIDE_RIGHT = ["DSA", "Problem Solving", "Clean Code"];
+
+// Hero positioning line — the part after " — " renders in the serif accent.
+const [tagBefore, tagAfter] = profile.tagline.split(" — ");
 
 const item = {
   hidden: { opacity: 0, y: 44 },
@@ -140,11 +144,11 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.035)_1px,transparent_1px)] bg-[size:76px_76px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_38%,black,transparent)]" />
         <motion.div
           style={{ opacity: reduce ? 1 : glowOpacity }}
-          className="absolute left-1/2 top-[36%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-[140px]"
+          className="absolute left-1/2 top-[36%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/12 blur-[140px]"
         />
         <motion.div
           style={{ x: reduce ? 0 : spotX, y: reduce ? 0 : spotY }}
-          className="absolute left-1/2 top-[36%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fg/[0.04] blur-[140px]"
+          className="absolute left-1/2 top-[36%] h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fg/[0.03] blur-[140px]"
         />
       </div>
 
@@ -175,7 +179,7 @@ export function Hero() {
           style={reduce ? undefined : { y: typeY, opacity: typeOpacity }}
           className="absolute inset-x-0 top-[calc(min(52dvh,125vw)+1.5rem)] z-10 flex w-full flex-col items-center justify-center px-5 pt-2 text-center sm:px-8 lg:left-10 lg:top-1/2 lg:w-auto lg:px-0 lg:pt-0 lg:-translate-y-1/2 lg:right-[calc(5%+380px+2.5rem)] xl:left-12 xl:right-[calc(5%+400px+2.5rem)]"
         >
-            <h1 className="select-none text-center leading-[0.86] tracking-[-0.04em]">
+            <h1 aria-label={profile.name} className="select-none text-center leading-[0.86] tracking-[-0.04em]">
               <span className="text-stroke block text-[clamp(3.2rem,13.5vw,9.5rem)] font-bold lg:text-[clamp(3rem,11vw,8.5rem)]">
                 <SplitText
                   text={profile.firstName.toUpperCase()}
@@ -203,28 +207,39 @@ export function Hero() {
                   .
                 </motion.em>
               </span>
-              {/* build → deploy → impact */}
+              {/* positioning line — what Suman actually builds */}
               <motion.p
                 variants={tagline}
                 initial="hidden"
                 animate="visible"
-                className="mt-9 hidden items-center justify-center gap-4 lg:flex"
-                aria-label={profile.heroTagline.join(" · ")}
+                className="mx-auto mt-9 hidden max-w-2xl text-balance lg:block"
               >
-                {profile.heroTagline.map((word, i) => (
-                  <span key={word} className="flex items-center gap-4">
-                    {i > 0 && <span className="h-px w-8 bg-line-strong sm:w-12" />}
-                    <span
-                      className={`font-mono text-xs uppercase tracking-[0.3em] text-muted ${
-                        i === 1 ? "font-serif text-xl normal-case italic tracking-normal text-accent-bright" : ""
-                      }`}
-                    >
-                      {word}
-                    </span>
+                {tagAfter ? (
+                  <span className="text-[15px] leading-relaxed text-muted">
+                    {tagBefore}
+                    <span aria-hidden="true" className="text-line-strong">{" — "}</span>
+                    <span className="font-serif text-xl italic text-accent-bright">{tagAfter}</span>
                   </span>
-                ))}
+                ) : (
+                  <span className="text-[15px] leading-relaxed text-muted">{profile.tagline}</span>
+                )}
               </motion.p>
             </h1>
+
+            {/* mobile CTAs — an immediate, always-visible action on small screens */}
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:hidden">
+              <button
+                type="button"
+                onClick={scrollToConnect}
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-10px_rgba(255,122,26,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-bright"
+              >
+                Let&rsquo;s talk
+              </button>
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/85 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-fg backdrop-blur-md">
+                <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ok" aria-hidden="true" />
+                Open to work
+              </span>
+            </div>
         </motion.div>
       </div>
 
@@ -247,8 +262,16 @@ export function Hero() {
               <Lanyard frontImage={profile.characterImage || profile.heroImage} className="h-full w-full" />
             </Suspense>
 
+            {/* the operator — a character peek beside the card */}
+            <span aria-hidden="true" className="absolute -right-4 top-[16%] z-10 hidden sm:block lg:-right-6">
+              <span className="absolute -top-5 right-2 rotate-[-6deg] font-serif text-base italic text-accent-bright">
+                hey!
+              </span>
+              <CharacterHead className="w-20 lg:w-24" />
+            </span>
+
             {/* open-to-work pill */}
-            <span className="pointer-events-auto absolute right-[-0.5rem] top-[47%] hidden items-center gap-2 rounded-full border border-line bg-panel/85 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-fg backdrop-blur-md sm:inline-flex">
+            <span className="pointer-events-auto absolute right-[-0.5rem] top-[47%] hidden items-center gap-2 rounded-full border border-line bg-panel/85 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-fg backdrop-blur-md lg:inline-flex">
               <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ok" aria-hidden="true" />
               Open to work
             </span>
@@ -257,7 +280,7 @@ export function Hero() {
             <button
               type="button"
               onClick={scrollToConnect}
-              className="pointer-events-auto absolute bottom-[3%] left-[-0.5rem] hidden items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-10px_rgba(255,122,26,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-bright sm:inline-flex"
+              className="pointer-events-auto absolute bottom-[3%] left-[-0.5rem] hidden items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-10px_rgba(255,122,26,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-bright lg:inline-flex"
             >
               Let&rsquo;s talk
             </button>

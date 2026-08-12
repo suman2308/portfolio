@@ -3,6 +3,7 @@ import { profile } from "../data/portfolio";
 import { Container, Reveal } from "../components/ui";
 import { FoldText } from "../components/effects/FoldText";
 import { GithubIcon, LinkedinIcon, XIcon } from "../components/icons";
+import { Character } from "../components/character/Character";
 
 export function Connect() {
   const year = new Date().getFullYear();
@@ -18,7 +19,10 @@ export function Connect() {
     <footer id="connect" className="relative overflow-hidden border-t border-line">
       <Container className="pb-20 pt-24 text-center sm:pb-24 sm:pt-32">
         <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em]">
+          <Character pose="wave" className="mx-auto h-28 w-28" />
+        </Reveal>
+        <Reveal>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.3em]">
             <span className="text-faint">06</span>
             <span className="mx-3 text-line-strong">/</span>
             <span className="text-accent-bright">Connect</span>
@@ -26,16 +30,16 @@ export function Connect() {
         </Reveal>
         <FoldText
           as="h2"
-          text="Let's build something great together."
-          highlight="great"
+          text="Let's build something worth shipping."
+          highlight="shipping"
           trigger="inView"
           delay={0.12}
           className="mx-auto mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-6xl"
         />
         <Reveal delay={0.16}>
           <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted">
-            I&rsquo;m always open to interesting projects, opportunities, and conversations about
-            software and AI. My inbox is open — say hello.
+            I&rsquo;m open to software engineering and AI/ML roles, interesting projects, and good
+            conversations. If you&rsquo;re building something real, let&rsquo;s talk.
           </p>
         </Reveal>
         <Reveal delay={0.22}>
