@@ -135,7 +135,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
             {/* signature stamp */}
             <div className="mt-8 flex items-center gap-3 border-t border-line pt-6">
-              <CharacterHead className="h-11 w-11 shrink-0" />
+              <CharacterHead className="w-11 shrink-0" />
               <div className="min-w-0">
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint">Signed &amp; shipped</p>
                 <p className="mt-0.5 truncate text-sm text-fg">Suman Jash</p>
@@ -188,7 +188,7 @@ export function Projects() {
           eyebrow="Projects"
           title="Things I've built, end to end."
           highlight="built"
-          description="Two main pieces of work, treated as case studies — what problem each one solves, how it's engineered, and what actually shipped."
+          description="Selected pieces of work, treated as case studies — what problem each one solves, how it's engineered, and what actually shipped."
           note="case studies · shipped, not mocked"
         />
         <div className="mt-14 space-y-8">

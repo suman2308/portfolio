@@ -29,7 +29,7 @@ export function Skills() {
           />
           <Reveal delay={0.12}>
             <div className="mb-2 hidden items-center gap-3 lg:flex" aria-hidden="true">
-              <CharacterHead className="h-11 w-11" />
+              <CharacterHead className="w-11" />
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint">// the toolbelt</p>
                 <p className="font-serif text-sm italic text-accent-bright">reached for daily</p>

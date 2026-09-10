@@ -19,7 +19,7 @@ export function Connect() {
     <footer id="connect" className="relative overflow-hidden border-t border-line">
       <Container className="pb-20 pt-24 text-center sm:pb-24 sm:pt-32">
         <Reveal>
-          <Character pose="wave" className="mx-auto h-28 w-28" />
+          <Character pose="wave" className="mx-auto w-24 sm:w-28" />
         </Reveal>
         <Reveal>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.3em]">

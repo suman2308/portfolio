@@ -1,11 +1,11 @@
-\documentclass[letterpaper,10.5pt]{article}
+\documentclass[letterpaper,10pt]{article}
 
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 \usepackage[english]{babel}
 \usepackage{tabularx}
 
@@ -14,7 +14,7 @@
 \addtolength{\oddsidemargin}{-0.6in}
 \addtolength{\textwidth}{1.2in}
 \addtolength{\topmargin}{-0.9in}
-\addtolength{\textheight}{1.78in}
+\addtolength{\textheight}{1.9in}
 
 \urlstyle{same}
 \setlength{\tabcolsep}{0in}
@@ -55,7 +55,7 @@
 %----------HEADER----------
 \begin{center}
 {\Huge \bfseries Suman Jash}\\[-1pt]
-\vspace{1pt}
+\vspace{2pt}
 
 +91 9593428292 $|$
 \href{mailto:iamsumanjash@gmail.com}{iamsumanjash@gmail.com} $|$
@@ -68,8 +68,8 @@
 %-----------SUMMARY-----------
 \section{Summary}
 
-Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, Flask, PHP, SQL, Docker, and GitHub Actions. Comfortable owning system design, security architecture, and model evaluation end-to-end; uses AI coding assistants the way a professional engineer does -- to move faster, not to skip understanding. Codeforces Pupil and CodeChef 3-Star with 600+ problems solved.
-\vspace{-4pt}
+Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, FastAPI, Flask, SQL, Docker, and GitHub Actions. Strong foundation in system design, database schema design, authentication and security, REST APIs, and machine learning model evaluation, with experience shipping projects end-to-end from design through CI/CD and deployment. Codeforces Pupil (1330), CodeChef 3-Star (1628), 600+ problems solved.
+\vspace{-5pt}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -94,7 +94,7 @@ partopsep=0pt
 {Arambagh, Hooghly}
 
 \end{itemize}
-\vspace{-10pt}
+\vspace{-5pt}
 
 %-----------PROJECTS-----------
 \section{Projects}
@@ -106,6 +106,38 @@ topsep=0pt,
 parsep=0pt,
 partopsep=0pt
 ]
+
+%----------SHETBHAV----------
+\resumeProjectHeading{
+\textbf{ShetBhav -- Market Intelligence Platform for Farmers}
+$|$ \textit{Python, FastAPI, Next.js, TypeScript, PostgreSQL, XGBoost}
+}
+
+\vspace{1pt}
+
+\href{https://github.com/suman2308/market-intelligence-for-farmer}{GitHub}
+$|$
+\href{https://market-intelligence-for-farmer.vercel.app}{Live Demo}
+
+\vspace{1pt}
+
+\begin{itemize}[
+leftmargin=0.2in,
+itemsep=1pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\resumeItem{Designed and built a full-stack platform with 104 REST endpoints, a 45-table PostgreSQL schema, and 24 Next.js/TypeScript routes, supporting 4 user roles with server-side RBAC.}
+
+\resumeItem{Built a multi-factor recommendation engine (8 weighted factors) and an XGBoost price-forecasting pipeline integrated with live market data from AGMARKNET (data.gov.in).}
+
+\resumeItem{Designed a full marketplace transaction flow -- listings, offers, counter-negotiation, and order tracking -- with JWT authentication and bcrypt password hashing.}
+
+\resumeItem{Wrote 246 backend tests and 15 end-to-end tests in a GitHub Actions CI/CD pipeline; deployed on Vercel and Render with PostgreSQL.}
+
+\end{itemize}
 
 %----------COURIER AI----------
 \resumeProjectHeading{
@@ -123,21 +155,17 @@ $|$
 
 \begin{itemize}[
 leftmargin=0.2in,
-itemsep=0pt,
+itemsep=1pt,
 topsep=0pt,
 parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Trained a HistGradientBoostingRegressor on 49,639 real DTDC courier records via randomized search over 150/960 configurations with 5-fold CV, reaching 0.5361-day MAE and 0.7466 $R^2$ (CV std $\pm$0.0056, train/test ratio 0.973 -- no overfitting) at $\sim$5.8$\mu$s inference per prediction.}
+\resumeItem{Tuned a HistGradientBoostingRegressor on 49,639 real courier records via randomized search over 150 configurations, reaching 0.5361-day MAE and 0.7466 $R^2$ under 5-fold cross-validation.}
 
-\resumeItem{Built an experiment harness benchmarking 5 base models (Random Forest, XGBoost, CatBoost, SVR/SVC, MLP) against voting and stacking ensembles across up to 17 combinations, for both regression and classification.}
+\resumeItem{Built a benchmarking harness comparing 5 base models (Random Forest, XGBoost, CatBoost, SVR, MLP) against voting and stacking ensembles for regression and classification.}
 
-\resumeItem{Designed a secured REST API (\texttt{/api/predict}) with SHA-256-hashed and Fernet-encrypted per-user API keys, tiered rate limiting (30/min, 1000/day), and plan-based prediction quotas enforced with HTTP 402 responses.}
-
-\resumeItem{Implemented scrypt password hashing, CSRF protection, and security headers; built a standalone admin console covering users, plans, analytics, and live system/ML health.}
-
-\resumeItem{Containerized with Docker and Docker Compose, added GitHub Actions CI running pytest, and deployed to Render behind Gunicorn.}
+\resumeItem{Designed a secured REST API with encrypted per-user API keys, tiered rate limiting, and plan-based quotas; containerized with Docker and deployed via an automated GitHub Actions CI/CD pipeline.}
 
 \end{itemize}
 
@@ -163,20 +191,18 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Designed a normalized 24-table MySQL schema (FK constraints, 13 indexes) powering 24 passenger-facing pages and a 16-page admin Operations Center spanning flight search, booking, check-in, and account management.}
+\resumeItem{Designed a normalized 24-table MySQL schema (FK constraints, 13 indexes) powering 40+ pages across passenger and admin operations.}
 
-\resumeItem{Built a Smart Fare Engine that discovers connecting itineraries (90-minute to 8-hour layovers, single connection) in 3 database queries per search, scoring each on price, duration, layover length, and stop count to surface Best Value/Cheapest/Fastest options.}
+\resumeItem{Built a Smart Fare Engine that discovers connecting itineraries in 3 DB queries per search, ranking each by price, duration, layover, and stop count.}
 
-\resumeItem{Built an interactive 2D seat map with multi-passenger booking (1-6 passengers), baggage/meal add-ons, promo code discounts, and QR-coded e-tickets with calendar export.}
+\resumeItem{Hardened the app with prepared statements, CSRF protection, and bcrypt hashing; wrote a dependency-free smoke-test suite and shipped a containerized Docker deployment.}
 
-\resumeItem{Built an admin analytics suite covering revenue, occupancy, and route reports with CSV exports, a searchable audit trail, and automated data-quality diagnostics; integrated live flight/airport data sync from the AviationStack API.}
-
-\resumeItem{Hardened the app with prepared statements, CSRF protection, bcrypt hashing, and login lockout tracking; wrote a dependency-free smoke-test suite and shipped a containerized deployment with Docker.}
+\resumeItem{Integrated live airport and airline data sync from the AviationStack API into an admin analytics suite with CSV exports and a searchable audit trail.}
 
 \end{itemize}
 
 \end{itemize}
-\vspace{-10pt}
+\vspace{-5pt}
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
@@ -184,23 +210,23 @@ partopsep=0pt
 \begin{itemize}[
 leftmargin=0.13in,
 label={},
-itemsep=0pt,
+itemsep=1pt,
 topsep=0pt,
 parsep=0pt,
 partopsep=0pt
 ]
 
 \item{
-\textbf{Languages:} C/C++, Python, PHP, Java, JavaScript, SQL, HTML, CSS \\[2pt]
-\textbf{Frameworks \& Libraries:} Flask, scikit-learn, Pandas, NumPy, XGBoost, CatBoost, Bootstrap 5 \\[2pt]
-\textbf{Databases:} MySQL, SQLite \\[2pt]
-\textbf{Developer Tools:} Git, GitHub, GitHub Actions, Docker, Docker Compose, pytest, VS Code, XAMPP \\[2pt]
-\textbf{Deployment:} Render, Vercel, InfinityFree \\[2pt]
-\textbf{Core Concepts:} Data Structures \& Algorithms, OOP, Operating Systems, Computer Networks, DBMS, Machine Learning, REST APIs, Authentication, Web Security, CI/CD
+\textbf{Languages:} C++, Python, Java, PHP, JavaScript, SQL, HTML, CSS \\[2pt]
+\textbf{Frameworks \& Libraries:} FastAPI, Flask, Next.js, scikit-learn, Pandas, NumPy, XGBoost, CatBoost \\[2pt]
+\textbf{Databases:} PostgreSQL, MySQL, SQLite \\[2pt]
+\textbf{Tools:} Git, GitHub Actions, Docker, Docker Compose, pytest \\[2pt]
+\textbf{Deployment:} Render, Vercel, Gunicorn \\[2pt]
+\textbf{Concepts:} Data Structures \& Algorithms, OOP, DBMS, Operating Systems, Computer Networks, System Design, REST APIs, Authentication, Web Security, CI/CD, Machine Learning
 }
 
 \end{itemize}
-\vspace{-10pt}
+\vspace{-5pt}
 
 %-----------ACHIEVEMENTS-----------
 \section{Achievements}
@@ -215,29 +241,7 @@ partopsep=0pt
 
 \resumeItem{Secured 2\textsuperscript{nd} rank in \textit{Code It}, a college-level duo-format coding competition with 40 teams competing in the final round.}
 
-\resumeItem{Co-designed a School ERP System concept for Smart India Hackathon (SIH); owned system design, QA/testing, and delivered the final presentation after the idea was selected for the college-level demonstration round.}
-
-\resumeItem{Codeforces Pupil (max rating 1327) $|$ CodeChef 3-Star (max rating 1628) $|$ 600+ problems solved across LeetCode, CodeChef, and Codeforces.}
-
-\end{itemize}
-\vspace{-8pt}
-
-%-----------CERTIFICATIONS-----------
-\section{Certifications}
-
-\begin{itemize}[
-leftmargin=0.18in,
-itemsep=0pt,
-topsep=0pt,
-parsep=0pt,
-partopsep=0pt
-]
-
-\resumeItem{Programming in Java (Elite) -- NPTEL, Score: 94/100 $|$ Cloud Computing -- NPTEL, Score: 92/100}
-
-\resumeItem{Generative AI \& Python Programming (30 hrs each) -- Ardent Computech Pvt. Ltd.}
-
-\resumeItem{Prompt Engineering for AI \& AI Automation and Deployment -- Eduskill (Virtual Internship)}
+\resumeItem{Led a team in the internal Smart India Hackathon round to build a College ERP System concept; owned system design, QA/testing, and project presentation after selection for the college-level demonstration round.}
 
 \end{itemize}
 

@@ -7,10 +7,11 @@ public/
 ├── images/                              # optimized images actually used by the site
 │   ├── hero.webp                        # Hero portrait (lanyard card front face) — WebP
 │   ├── og.jpg                           # 1200×630 Open-Graph share image
+│   ├── project-shetbhav.webp            # ShetBhav live-demo login screenshot (1440×900, captured from the running app)
 │   ├── project-courierai.webp           # CourierAI landing-page screenshot (from the repo README)
 │   └── project-aerobook.webp            # AeroBook landing-page screenshot (from the repo README)
 ├── resume/
-│   ├── Suman_Jash_Resume.pdf            # compiled from Suman_Jash_Resume.tex (see README.md)
+│   ├── Suman_Jash_Resume.pdf            # compiled from Suman_Jash_Resume.tex (see root README.md)
 │   └── Suman_Jash_Resume.tex            # LaTeX source of the resume
 ├── robots.txt                           # allows all crawlers
 └── certificates/                        # all certificates, named by content
@@ -31,6 +32,7 @@ The un-compressed sources live in `/originals` at the project root (outside
 ```
 originals/
 ├── hero.jpg                    # original portrait
+├── project-shetbhav.png        # original screenshot (live demo login, captured at 2880×1800 @2x)
 ├── project-courierai.png       # original screenshot
 └── project-aerobook.png        # original screenshot
 ```
@@ -40,27 +42,21 @@ Conversion history (done with `sharp`, ad hoc — no dependency added):
 | File | Before | After (WebP) |
 |---|---|---|
 | hero.jpg | 390 KB | 131 KB |
+| project-shetbhav.png | captured live at 2880×1800 (2× scale) | 21 KB |
 | project-courierai.png | 197 KB | 35 KB |
 | project-aerobook.png | 259 KB | 26 KB |
 
 All conversions preserve the original dimensions (hero stays 3:4, screenshots
-stay 1440×900) with a mean pixel difference under 1.6/255 — visually lossless.
+stay landscape) with a mean pixel difference under 1.6/255 — visually lossless.
 `og.jpg` (1200×630) is a cover crop of `hero.jpg` used for link shares.
 
-> The SIH participation certificate was removed from the site on request; the
-> SIH achievement itself still appears in the About → Highlights list.
+## Hero card image
 
-## Anime/3D character for the Hero
-
-The Hero supports a `characterImage` slot in `src/data/portfolio.ts` — set it
-(e.g. `characterImage: "/images/character.png"`) and the Hero shows the
-character instead of the photo.
-
-> The mockup you shared is a full-page design (character + text baked together),
-> so it can't be cut out cleanly. Generate a **character-only** image and drop it
-> in as `public/images/character.png`.
+The Hero's lanyard card front face is `profile.heroImage` from
+`src/data/portfolio.ts` (`/images/hero.webp`). The card is a 3:4 portrait crop
+(`object-cover`). A `characterImage` slot also exists — if set, it replaces the
+photo on the card.
 
 Notes:
 
-- The Hero card is a 3:4 portrait crop (`object-cover`).
 - All site content (links, stats, certificate entries) is edited in `src/data/portfolio.ts`.

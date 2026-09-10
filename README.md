@@ -1,13 +1,15 @@
 # Suman Jash — Portfolio
 
-A premium, animated, fully responsive developer portfolio built with **React · Vite · TypeScript · Tailwind CSS · Motion**.
+A premium, animated, fully responsive developer portfolio built with **React · Vite · TypeScript · Tailwind CSS · Motion** (plus three.js for the 3D lanyard card).
+
+Live: **https://portfolio-self-phi-13.vercel.app/**
 
 ## Quick start
 
 ```bash
 npm install
 npm run dev      # local dev server
-npm run build    # production build → dist/
+npm run build    # refreshes live CP stats, then production build → dist/
 npm run preview  # preview the production build
 npm run typecheck
 ```
@@ -21,25 +23,32 @@ npm run typecheck
 
 - `profile` — name, roles, tagline, location, email, resume link, links, bio, focus areas, achievements
 - `profile.educationList` — school, degree, years and location for the Education block in About
-- `heroImage` — path to your portrait in `public/images/` (e.g. `/images/hero.webp`; the original JPG/PNG sources live in `/originals`)
+- `heroImage` — path to your portrait in `public/images/` (e.g. `/images/hero.webp`; the original sources live in `/originals`)
 - `stats` — experience, projects, problems solved, certifications (strings render as-is)
 - `heroMarquee` / `heroChips` — marquee words and floating chips in the Hero
-- `projects` — your 2 main projects, structured as case studies: `tagline`, `problem`, `result`, `features`, `tech`, `github`/`demo` links, `domain` (shown in the browser-frame URL bar), `ai` (shows the AI/ML core badge) and `image`
+- `projects` — the case studies (ShetBhav, CourierAI, AeroBook): `tagline`, `problem`, `result`, `features`, `tech`, `github`/`demo` links, `domain` (shown in the browser-frame URL bar), `ai` (shows the AI/ML core badge) and `image`. Adding a fourth project is just a new entry — the section renders any number of cards.
 - `skills` — categorized skill groups
-- `platforms` — competitive programming profiles (handle, URL). **The stats come from `cp-live.ts`**, which is regenerated from the live sources on every build — see below.
+- `platforms` — competitive programming profiles (handle, URL). **The stats come from `cp-live.ts`** — see below.
 - `certifications` — certificates with issuer, year and verification URL
 
 ## Live competitive-programming stats
 
-Before every build, `scripts/fetch-cp-stats.mjs` (npm's `prebuild` hook, so it runs automatically on `npm run build`) pulls the Coding-section numbers from the live sources and writes `src/data/cp-live.ts`:
+The stats never go stale — two layers:
 
-- **Codeforces** — official JSON API (rating, max, rank)
-- **LeetCode** — public GraphQL profile (solved counts by difficulty)
-- **CodeChef** — no public API, so it best-effort scrapes the profile page
+1. **Build time** — `scripts/fetch-cp-stats.mjs` (npm's `prebuild` hook, so it runs automatically on `npm run build`) pulls the Coding-section numbers from the live sources and writes `src/data/cp-live.ts`:
+   - **Codeforces** — official JSON API (rating, max rating, rank)
+   - **LeetCode** — public GraphQL profile (solved counts by difficulty)
+   - **CodeChef** — no public API, so it best-effort scrapes the profile page
 
-Every platform falls back to its previous values if its source is unreachable, so a failed fetch never breaks the build. To refresh manually without a full build: `npm run cp-stats`. To point the script at different profiles, edit the `HANDLES` map at the top of the script.
+   Every platform falls back to its previous values if its source is unreachable, so a failed fetch never breaks the build. To refresh manually without a full build: `npm run cp-stats`.
 
-Place images in `public/images/` and reference them as `/images/…`. The hero photo becomes the lanyard card's front face automatically; drop a custom image in `backImage` or the `frontImage` prop of `<Lanyard>` in `src/components/Hero.tsx` to swap faces.
+2. **In the browser** — the Codeforces card additionally re-pulls the official API from the visitor's browser (Codeforces sends CORS `*`), so the rating is current even between deploys. If the request fails or is slow (>8s), the card silently keeps the build-time values.
+
+To point the script at different profiles, edit the `HANDLES` map at the top of `scripts/fetch-cp-stats.mjs`.
+
+## Images & assets
+
+Place images in `public/images/` and reference them as `/images/…`. Details — including the originals/optimization history and how the hero photo becomes the lanyard card's front face — are in [`public/images/README.md`](public/images/README.md).
 
 ## Resume
 
@@ -52,29 +61,37 @@ grep -vE 'input\{glyphtounicode\}|pdfgentounicode=1' resume.tex > resume-xetex.t
 cp resume-xetex.pdf ../../public/resume/Suman_Jash_Resume.pdf
 ```
 
+(Resume build input is `resume.tex` — copy the edited `.tex` there first.)
+
 ## Structure
 
 ```
-```
+index.html                  metadata (SEO/OG/Twitter/JSON-LD) + font loading
+scripts/
+  fetch-cp-stats.mjs        build-time live CP stats fetcher (prebuild hook)
+public/
+  images/                   optimized WebP images (+ README with the asset map)
+  resume/                   resume PDF + LaTeX source
+  certificates/             verification PDFs linked from the Certifications section
+  robots.txt, favicon.svg
 src/
-  components/   Nav, Hero, Marquee, icons, shared UI primitives
-  components/character/  Character.tsx — the site's illustrated signature (poses + CharacterHead cameo)
-  components/effects/  LightFall, SplashCursor, SplitText, FoldText (canvas + text animation)
-  components/effects/Lanyard.tsx  3D swinging ID card (three.js / react-three-fiber, lazy-loaded)
-  sections/     About, Projects, Skills, Coding, Certifications, Connect
-  data/         portfolio.ts — site content; cp-live.ts — generated live CP stats
-  lib/          animation presets
-  index.css     design system (theme tokens, keyframes, reduced motion)
-scripts/        fetch-cp-stats.mjs — build-time live CP stats fetcher
+  components/               Nav, Hero, Marquee, icons, shared UI primitives
+  components/character/     Character.tsx — the site's illustrated signature (poses + head cameo)
+  components/effects/       LightFall, SplashCursor, SplitText, FoldText, Lanyard (3D, lazy chunk)
+  sections/                 About, Projects, Skills, Coding, Certifications, Connect
+  data/                     portfolio.ts — all site content; cp-live.ts — generated live CP stats
+  lib/anim.ts               shared easing curve
+  index.css                 design system (theme tokens, keyframes, reduced motion)
+originals/                  un-compressed source images (kept in the repo for re-deriving; never in the build output)
 ```
 
-## Deploying to GitHub Pages
+## Deploying
 
-The build is a plain static site — `npm run build` outputs to `dist/` and it can be hosted anywhere (GitHub Pages, Netlify, Render, Vercel).
+The build is a plain static site — `npm run build` outputs to `dist/` and it can be hosted anywhere (Vercel, Netlify, GitHub Pages, Render).
 
-> The production site URL lives in `index.html` (canonical, Open Graph/Twitter image URLs, and the JSON-LD Person schema). It's currently `https://portfolio-solo-e905.vercel.app/` — update all references there if the domain changes.
+> The production site URL lives in `index.html` (canonical, Open Graph/Twitter image URLs, and the JSON-LD Person schema). It's currently `https://portfolio-self-phi-13.vercel.app/` — update all references there if the domain ever changes.
 
-For a **project page** (`username.github.io/repo/`), set the base path first:
+For a **GitHub Pages project page** (`username.github.io/repo/`), set the base path first:
 
 ```bash
 npx vite build --base=/repo-name/
@@ -82,11 +99,13 @@ npx vite build --base=/repo-name/
 
 (For `username.github.io` root pages, or Netlify/Render/Vercel, the default `/` base is correct.)
 
+> On Vercel, make sure **Deployment Protection is off** (Project → Settings → Deployment Protection) so recruiters — and the og:image crawler — can reach the site.
+
 ## Security & hygiene
 
-- **Static site** — no backend, no database, no environment secrets in the codebase (`process.env` / `import.meta.env` are unused).
+- **Static site** — no backend, no database, no environment secrets in the codebase (`process.env` / `import.meta.env` are unused). The only runtime API call is the public, keyless Codeforces user endpoint (CORS-open) plus the build-time stats fetch.
 - **`npm audit` — 0 vulnerabilities** on all dependencies.
-- No `dangerouslySetInnerHTML`, `eval`, or dynamic `innerHTML`; all user data is rendered as plain text via React.
+- No `dangerouslySetInnerHTML`, `eval`, or dynamic `innerHTML`; all data renders as plain text via React.
 - Public assets (resume, certificates, project screenshots) contain only public information already shared on LinkedIn/GitHub.
 - `.gitignore` covers `node_modules`, `dist`, `.tooling`, `.env*`, and editor files — secrets can't be committed accidentally.
 
@@ -95,7 +114,7 @@ npx vite build --base=/repo-name/
 The portfolio has an original illustrated **character** (`src/components/character/Character.tsx`) — a smart, young, cool version of Suman in **black wayfarer sunglasses**, with a styled haircut that frames the face, a youthful angular jaw, a relaxed confident mouth, a light-blue shirt and an understated ID card on a lanyard that echoes the Hero's hanging card. The face is the identity and stays pixel-identical everywhere; only the pose changes:
 
 - **Hero** — a small `CharacterHead` peeks beside the hanging ID card
-- **About** — the character's first full appearance: relaxed, arms crossed, over a `> whoami` terminal card
+- **About** — relaxed, arms crossed, over a `> whoami` terminal card
 - **Projects** — every case study is stamped "Signed & shipped" with the character head
 - **Coding** — the character sits at a `solve.py` terminal scene, focused over a laptop
 - **Skills** — a small "the toolbelt" cameo
@@ -111,6 +130,6 @@ Three poses are available (`relaxed`, `laptop`, `wave`) via the `pose` prop; `Ch
 - Cursor: warm ember trail (**SplashCursor**) with a hue range from orange to gold.
 - Custom canvas effects: **LightFall** (falling light streaks in the Hero) and **SplashCursor** (ember trail following the pointer) — both disabled on touch devices.
 - Text animation: **SplitText** (character stagger) in the Hero, **FoldText** (3D paper-unfold with crease shading) for every section heading.
-- `prefers-reduced-motion` is honored globally (Motion `reducedMotion="user"` + CSS overrides + components rendering static frames).
+- `prefers-reduced-motion` is honored globally (Motion `reducedMotion="user"` + CSS overrides + components rendering static frames; SplashCursor fully disabled; the Lanyard renders a static frame).
 - Mouse parallax / tilt / cursor effects are disabled for touch devices and reduced-motion users.
 - No horizontal overflow; layout adapts (not shrinks) across desktop → small mobile.

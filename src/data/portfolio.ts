@@ -51,15 +51,14 @@ export const profile = {
   },
 
   bio: [
-    "Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, Flask, PHP, SQL, Docker, and GitHub Actions.",
-    "Comfortable owning system design, security architecture, and model evaluation end-to-end — I use AI coding assistants the way a professional engineer does: to move faster, not to skip understanding.",
+    "Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, FastAPI, Flask, SQL, Docker, and GitHub Actions.",
+    "Strong foundation in system design, database schema design, authentication and security, REST APIs, and machine learning model evaluation — I ship projects end-to-end, from design through CI/CD and deployment, and I use AI coding assistants the way a professional engineer does: to move faster, not to skip understanding.",
     "B.Tech in Computer Science at Narula Institute of Technology (CGPA 8.96/10), with a strong foundation in DSA, OOP, operating systems, computer networks, DBMS, and machine learning.",
   ],
 
   achievements: [
     "2nd rank in Code It — a college-level duo-format coding competition with 40 teams in the final round.",
-    "Co-designed a School ERP System concept for Smart India Hackathon (SIH); owned system design and QA/testing, and delivered the final presentation after the idea was selected for the college-level demonstration round.",
-    "Codeforces Pupil (max 1327) · CodeChef 3-Star (max 1628) · 600+ problems solved across LeetCode, CodeChef, and Codeforces.",
+    "Led a team in the internal Smart India Hackathon round to build a College ERP System concept; owned system design, QA/testing, and project presentation after selection for the college-level demonstration round.",
   ],
 
   focusAreas: ["Full-Stack Development", "Machine Learning", "DSA / Problem Solving"],
@@ -67,7 +66,7 @@ export const profile = {
 
 export const stats = [
   { label: "Experience", value: "Fresher" },
-  { label: "Projects shipped", value: 2 },
+  { label: "Projects shipped", value: 3 },
   { label: "Problems solved", value: 600 },
   { label: "Certifications", value: 7 },
 ];
@@ -81,7 +80,7 @@ export const heroMarquee = [
   "Clean Code",
 ];
 
-export const heroChips = ["Python", "Flask", "Docker", "scikit-learn"];
+export const heroChips = ["Python", "FastAPI", "Next.js", "PostgreSQL"];
 
 export type Project = {
   title: string;
@@ -103,6 +102,26 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "ShetBhav",
+    tagline: "Know the market. Choose better. Earn more. — a market-intelligence platform that helps farmers decide where, when, and to whom to sell.",
+    problem:
+      "Farmers often sell at whichever mandi is nearest, without knowing whether another market or a buyer would pay more. ShetBhav closes that gap with official mandi prices, buyer demand, and a Smart Sell engine that ranks every selling option by net income after transport, storage, handling, and spoilage costs.",
+    result:
+      "A full-stack platform with 104 REST endpoints, a 45-table PostgreSQL schema, and 24 Next.js/TypeScript routes across 4 user roles with server-side RBAC — a Smart Sell engine, XGBoost price forecasting on live AGMARKNET data, a complete marketplace with FPO aggregation, and a trilingual UI (English, Hindi, Marathi) — verified by 246 backend + 15 end-to-end tests in CI/CD.",
+    features: [
+      "Designed and built a full-stack platform with 104 REST endpoints, a 45-table PostgreSQL schema, and 24 Next.js/TypeScript routes, supporting 4 user roles with server-side RBAC and a trilingual UI (English, Hindi, Marathi)",
+      "Smart Sell engine scoring every selling option by net income (8 weighted factors), plus an XGBoost 7-day price-forecasting pipeline on live AGMARKNET data (data.gov.in) with automatic baseline fallback",
+      "Full marketplace transaction flow — listings, offers with counter-negotiation history, order lifecycle, simulated payments, and FPO aggregation with payment distribution — secured with JWT authentication and bcrypt hashing",
+      "246 backend tests and 15 Playwright end-to-end tests in a GitHub Actions CI/CD pipeline; deployed on Vercel (frontend) and Render with PostgreSQL (backend)",
+    ],
+    tech: ["Python", "FastAPI", "Next.js", "TypeScript", "PostgreSQL", "XGBoost"],
+    github: "https://github.com/suman2308/market-intelligence-for-farmer",
+    demo: "https://market-intelligence-for-farmer.vercel.app",
+    domain: "market-intelligence-for-farmer.vercel.app",
+    ai: true,
+    image: "/images/project-shetbhav.webp", // branded landing screenshot (register + tagline)
+  },
   {
     title: "CourierAI",
     tagline: "ML-powered delivery time prediction — from data to a secured, rate-limited API.",
@@ -148,32 +167,32 @@ export const skills: { category: string; icon: string; items: string[] }[] = [
   {
     category: "Languages",
     icon: "code",
-    items: ["C / C++", "Python", "PHP", "Java", "JavaScript", "SQL", "HTML", "CSS"],
+    items: ["C++", "Python", "Java", "PHP", "JavaScript", "SQL", "HTML", "CSS"],
   },
   {
     category: "Frameworks & Libraries",
     icon: "backend",
-    items: ["Flask", "scikit-learn", "Pandas", "NumPy", "XGBoost", "CatBoost", "Bootstrap 5"],
+    items: ["FastAPI", "Flask", "Next.js", "scikit-learn", "Pandas", "NumPy", "XGBoost", "CatBoost"],
   },
   {
     category: "Databases",
     icon: "database",
-    items: ["MySQL", "SQLite"],
+    items: ["PostgreSQL", "MySQL", "SQLite"],
   },
   {
     category: "Developer Tools",
     icon: "tools",
-    items: ["Git", "GitHub", "GitHub Actions", "Docker", "Docker Compose", "pytest", "VS Code", "XAMPP"],
+    items: ["Git", "GitHub Actions", "Docker", "Docker Compose", "pytest"],
   },
   {
     category: "Deployment",
     icon: "deploy",
-    items: ["Render", "Vercel", "InfinityFree"],
+    items: ["Render", "Vercel", "Gunicorn"],
   },
   {
     category: "Core Concepts",
     icon: "concepts",
-    items: ["Data Structures & Algorithms", "OOP", "Operating Systems", "Computer Networks", "DBMS", "Machine Learning", "REST APIs", "Authentication", "Web Security", "CI / CD"],
+    items: ["Data Structures & Algorithms", "OOP", "DBMS", "Operating Systems", "Computer Networks", "System Design", "REST APIs", "Authentication", "Web Security", "CI / CD", "Machine Learning"],
   },
 ];
 

@@ -6,11 +6,11 @@ export const cpLive: Record<string, { label: string; value: string }[]> = {
   "codeforces": [
     {
       "label": "Rating",
-      "value": "1327"
+      "value": "1330"
     },
     {
       "label": "Max",
-      "value": "1327"
+      "value": "1330"
     },
     {
       "label": "Rank",
@@ -34,19 +34,19 @@ export const cpLive: Record<string, { label: string; value: string }[]> = {
   "leetcode": [
     {
       "label": "Solved",
-      "value": "45"
+      "value": "78"
     },
     {
       "label": "Easy",
-      "value": "18"
+      "value": "30"
     },
     {
       "label": "Medium",
-      "value": "23"
+      "value": "40"
     },
     {
       "label": "Hard",
-      "value": "4"
+      "value": "8"
     }
   ]
 };

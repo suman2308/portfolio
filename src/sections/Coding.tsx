@@ -1,6 +1,45 @@
+import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { codingIntro, platforms, type Platform } from "../data/portfolio";
 import { Container, Reveal, SectionHeading } from "../components/ui";
+
+/** Codeforces ratings move between deploys, so the card re-pulls the official
+ *  API in the visitor's browser (Codeforces sends CORS `*`). Falls back
+ *  silently to the build-time values when offline or blocked. */
+function useCodeforcesLive(handle: string, fallback: Platform["stats"]): Platform["stats"] {
+  const [stats, setStats] = useState(fallback);
+  useEffect(() => {
+    if (!handle) return;
+    let cancelled = false;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    fetch(`https://codeforces.com/api/user.info?handles=${handle}`, {
+      signal: ctrl.signal,
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((j) => {
+        const u = j?.result?.[0];
+        if (cancelled || j?.status !== "OK" || typeof u?.rating !== "number") return;
+        const rank = String(u.rank ?? "")
+          .replace(/^\w/, (c) => c.toUpperCase())
+          .replace(/\s\w/g, (c) => c.toUpperCase());
+        setStats([
+          { label: "Rating", value: String(u.rating) },
+          { label: "Max", value: String(u.maxRating ?? u.rating) },
+          { label: "Rank", value: rank || fallback.find((s) => s.label === "Rank")?.value || "—" },
+        ]);
+      })
+      .catch(() => {
+        /* unreachable — build-time values are already rendered */
+      });
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handle]);
+  return stats;
+}
 import { BRAND_ICONS } from "../components/icons";
 import { Character } from "../components/character/Character";
 
@@ -37,7 +76,7 @@ function TerminalScene() {
               {"\n"}
               <span className="text-faint"># 600+ solved — and counting</span>
               {"\n"}
-              <span className="text-faint"># numbers pulled live at build time</span>
+              <span className="text-faint"># ratings pulled live — never stale</span>
               <span className="ml-1 inline-block h-3.5 w-2 translate-y-0.5 animate-blink bg-accent" aria-hidden="true" />
             </code>
           </pre>
@@ -92,6 +131,11 @@ function PlatformCard({ platform, index }: { platform: Platform; index: number }
 }
 
 export function Coding() {
+  const cf = platforms.find((p) => p.icon === "codeforces");
+  const cfStats = useCodeforcesLive(cf?.handle ?? "", cf?.stats ?? []);
+  const livePlatforms = platforms.map((p) =>
+    p.icon === "codeforces" ? { ...p, stats: cfStats } : p
+  );
   return (
     <section id="coding" className="relative py-24 sm:py-32">
       <Container>
@@ -102,13 +146,13 @@ export function Coding() {
             title="Where I keep my edge sharp."
             highlight="edge"
             description={codingIntro}
-            note="real numbers, pulled live at build time"
+            note="real numbers — live from Codeforces, refreshed at every build"
           />
           <TerminalScene />
         </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {platforms.map((platform, i) => (
+          {livePlatforms.map((platform, i) => (
             <PlatformCard key={platform.name} platform={platform} index={i} />
           ))}
         </div>
