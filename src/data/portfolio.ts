@@ -18,7 +18,7 @@ export const profile = {
   educationList: [
     {
       school: "Narula Institute of Technology",
-      degree: "B.Tech in Computer Science and Engineering — CGPA 8.96/10",
+      degree: "B.Tech in Computer Science and Engineering — CGPA 8.99/10",
       years: "2023 – 2027",
       location: "Kolkata, West Bengal",
     },
@@ -53,7 +53,7 @@ export const profile = {
   bio: [
     "Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, FastAPI, Flask, SQL, Docker, and GitHub Actions.",
     "Strong foundation in system design, database schema design, authentication and security, REST APIs, and machine learning model evaluation — I ship projects end-to-end, from design through CI/CD and deployment, and I use AI coding assistants the way a professional engineer does: to move faster, not to skip understanding.",
-    "B.Tech in Computer Science at Narula Institute of Technology (CGPA 8.96/10), with a strong foundation in DSA, OOP, operating systems, computer networks, DBMS, and machine learning.",
+    "B.Tech in Computer Science at Narula Institute of Technology (CGPA 8.99/10), with a strong foundation in DSA, OOP, operating systems, computer networks, DBMS, and machine learning.",
   ],
 
   achievements: [
@@ -68,7 +68,7 @@ export const stats = [
   { label: "Experience", value: "Fresher" },
   { label: "Projects shipped", value: 3 },
   { label: "Problems solved", value: 600 },
-  { label: "Certifications", value: 7 },
+  { label: "Certifications", value: 8 },
 ];
 
 export const heroMarquee = [
@@ -257,18 +257,25 @@ export const certifications: Certification[] = [
     detail: "Score: 92/100 · 12-week course",
   },
   {
-    title: "AI Deployment & Automation — Internship Credential",
-    issuer: "Eduskill",
+    title: "AI Deployment & Automation — Virtual Internship",
+    issuer: "EduSkills (AICTE · Ministry of Education)",
     year: "2026",
     url: "/certificates/AI_Deployment_Automation_Internship.pdf",
-    detail: "8-week program · Issued Mar 10 · ID 2026-314A92062F",
+    detail: "10-week program · Jan–Mar 2026 · ID 42C2841CCB3EE00CF2BB",
   },
   {
-    title: "Prompt Engineering for AI — Internship Credential",
-    issuer: "Eduskill",
+    title: "Prompt Engineering for AI — Virtual Internship",
+    issuer: "EduSkills (AICTE · Ministry of Education)",
     year: "2026",
     url: "/certificates/Prompt_Engineering_AI_Internship.pdf",
-    detail: "8-week program · Issued Aug 11 · ID 2026-E8309C1FD8",
+    detail: "8-week program · Apr–Jun 2026 · ID 4EF6BBA5772AB76A234E",
+  },
+  {
+    title: "DevOps & Cloud Automation — Virtual Internship",
+    issuer: "EduSkills (AICTE · Ministry of Education)",
+    year: "2026",
+    url: "/certificates/DevOps_Cloud_Automation_Internship.pdf",
+    detail: "8-week program · Aug–Oct 2026 · ID 41FBB98CD82AE33A3E65",
   },
   {
     title: "MEAN Full Stack Web Development — 36 Hour Training",

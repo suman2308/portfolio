@@ -35,10 +35,9 @@
 
 \newcommand{\resumeSubheading}[4]{
 \vspace{1pt}\item
-\begin{tabular*}{\linewidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
-\textbf{#1} & #2 \\
-\textit{#3} & \textit{#4} \\
-\end{tabular*}\vspace{-2pt}
+\textbf{#1} \hfill #2 \\
+\textit{#3} \hfill \textit{#4}
+\vspace{-2pt}
 }
 
 \newcommand{\resumeProjectHeading}[1]{
@@ -67,9 +66,9 @@
 
 %-----------SUMMARY-----------
 \section{Summary}
-
-Computer Science Engineering student who designs, builds, and deploys full-stack, backend, and machine learning systems using Python, FastAPI, Flask, SQL, Docker, and GitHub Actions. Strong foundation in system design, database schema design, authentication and security, REST APIs, and machine learning model evaluation, with experience shipping projects end-to-end from design through CI/CD and deployment. Codeforces Pupil (1330), CodeChef 3-Star (1628), 600+ problems solved.
-\vspace{-5pt}
+\vspace{-1pt}
+Computer Science student (Java/Python/C++, DSA) who has shipped full-stack applications end-to-end -- REST APIs, relational schema design, automated testing, and CI/CD deployment -- with experience integrating third-party APIs into production systems.
+\vspace{-6pt}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -85,13 +84,37 @@ partopsep=0pt
 
 \resumeSubheading
 {Narula Institute of Technology}{2023 -- 2027}
-{B.Tech in Computer Science and Engineering, CGPA: 8.96/10}
+{B.Tech in Computer Science and Engineering, CGPA: 8.99/10}
 {Kolkata, West Bengal}
 
 \resumeSubheading
 {Arambagh Vivekananda Academy}{2021 -- 2023}
 {CBSE Class XII -- 85.8\% $|$ CBSE Class X -- 94.4\%}
 {Arambagh, Hooghly}
+
+\end{itemize}
+\vspace{-5pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+
+\begin{itemize}[
+leftmargin=0.13in,
+label={},
+itemsep=1pt,
+topsep=0pt,
+parsep=0pt,
+partopsep=0pt
+]
+
+\item{
+\textbf{Languages:} Java, Python, C++, C, SQL, JavaScript (ES6+), TypeScript, PHP, HTML5, CSS3 \\[2pt]
+\textbf{Core CS Concepts:} Data Structures \& Algorithms, Object-Oriented Programming, System Design, DBMS \\[2pt]
+\textbf{Backend \& APIs:} RESTful API Design, FastAPI, Flask, Node.js, Express.js, Next.js \\[2pt]
+\textbf{Databases:} PostgreSQL, MySQL, SQLite, MariaDB, Relational Schema Design \\[2pt]
+\textbf{DevOps \& Testing:} Git, GitHub Actions (CI/CD), Docker, Docker Compose, pytest, Playwright, Linux \\[2pt]
+\textbf{Security:} Authentication, Role-Based Access Control (RBAC), Rate Limiting, Password Hashing, API Key Hashing/Encryption
+}
 
 \end{itemize}
 \vspace{-5pt}
@@ -109,8 +132,8 @@ partopsep=0pt
 
 %----------SHETBHAV----------
 \resumeProjectHeading{
-\textbf{ShetBhav -- Market Intelligence Platform for Farmers}
-$|$ \textit{Python, FastAPI, Next.js, TypeScript, PostgreSQL, XGBoost}
+\textbf{ShetBhav -- Market Intelligence \& ERP Platform}
+$|$ \textit{Python, FastAPI, Next.js, TypeScript, PostgreSQL, Docker, GitHub Actions}
 }
 
 \vspace{1pt}
@@ -118,6 +141,8 @@ $|$ \textit{Python, FastAPI, Next.js, TypeScript, PostgreSQL, XGBoost}
 \href{https://github.com/suman2308/market-intelligence-for-farmer}{GitHub}
 $|$
 \href{https://market-intelligence-for-farmer.vercel.app}{Live Demo}
+$|$
+\href{https://shetbhav-backend.onrender.com/docs}{API Docs}
 
 \vspace{1pt}
 
@@ -129,20 +154,17 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Designed and built a full-stack platform with 104 REST endpoints, a 45-table PostgreSQL schema, and 24 Next.js/TypeScript routes, supporting 4 user roles with server-side RBAC.}
-
-\resumeItem{Built a multi-factor recommendation engine (8 weighted factors) and an XGBoost price-forecasting pipeline integrated with live market data from AGMARKNET (data.gov.in).}
-
-\resumeItem{Designed a full marketplace transaction flow -- listings, offers, counter-negotiation, and order tracking -- with JWT authentication and bcrypt password hashing.}
-
-\resumeItem{Wrote 246 backend tests and 15 end-to-end tests in a GitHub Actions CI/CD pipeline; deployed on Vercel and Render with PostgreSQL.}
+\resumeItem{Built a full-stack ERP platform with a modular REST backend (104 endpoints) and a normalized 45-table PostgreSQL schema, serving 4 distinct roles under server-side RBAC.}
+\resumeItem{Designed a multi-mode fallback adapter for government market data ingestion (data.gov.in AGMARKNET, 800+ records), keeping the pipeline available through upstream outages and format changes.}
+\resumeItem{Automated core business logic -- price forecasting, an 8-factor decision engine, and a multi-party negotiation flow -- to remove manual work from order and offer tracking.}
+\resumeItem{Maintained code quality with 246 backend pytest units and 15 Playwright E2E tests wired into a GitHub Actions CI/CD pipeline for automated build, test, and deploy.}
 
 \end{itemize}
 
 %----------COURIER AI----------
 \resumeProjectHeading{
-\textbf{CourierAI -- ML-Powered Delivery Time Prediction Platform}
-$|$ \textit{Python, Flask, scikit-learn, SQLite, Docker}
+\textbf{CourierAI -- Automated Delivery Prediction \& Service Platform}
+$|$ \textit{Python, Flask, scikit-learn, SQLite, Docker, GitHub Actions}
 }
 
 \vspace{1pt}
@@ -161,18 +183,16 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Tuned a HistGradientBoostingRegressor on 49,639 real courier records via randomized search over 150 configurations, reaching 0.5361-day MAE and 0.7466 $R^2$ under 5-fold cross-validation.}
-
-\resumeItem{Built a benchmarking harness comparing 5 base models (Random Forest, XGBoost, CatBoost, SVR, MLP) against voting and stacking ensembles for regression and classification.}
-
-\resumeItem{Designed a secured REST API with encrypted per-user API keys, tiered rate limiting, and plan-based quotas; containerized with Docker and deployed via an automated GitHub Actions CI/CD pipeline.}
+\resumeItem{Built a secure prediction REST API (POST /api/predict) with per-user API keys (SHA-256 hashed at rest, Fernet-encrypted for owner reveal), tiered rate limiting, and quota enforcement for high stability under load.}
+\resumeItem{Tuned and deployed a HistGradientBoostingRegressor on 49,639 real delivery records via randomized search with 5-fold CV, achieving a mean absolute error of 0.536 days on holdout.}
+\resumeItem{Containerized the service with Docker and built a GitHub Actions CI pipeline with health and metrics endpoints for continuous monitoring and deployment.}
 
 \end{itemize}
 
 %----------AEROBOOK----------
 \resumeProjectHeading{
-\textbf{AeroBook -- Airline Reservation \& Flight Operations Platform}
-$|$ \textit{PHP 8, MySQL, Bootstrap 5, JavaScript, Docker}
+\textbf{AeroBook -- Airline Operations \& Reservation System}
+$|$ \textit{PHP 8, MySQL, JavaScript, Bootstrap 5, Docker}
 }
 
 \vspace{1pt}
@@ -191,45 +211,17 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Designed a normalized 24-table MySQL schema (FK constraints, 13 indexes) powering 40+ pages across passenger and admin operations.}
-
-\resumeItem{Built a Smart Fare Engine that discovers connecting itineraries in 3 DB queries per search, ranking each by price, duration, layover, and stop count.}
-
-\resumeItem{Hardened the app with prepared statements, CSRF protection, and bcrypt hashing; wrote a dependency-free smoke-test suite and shipped a containerized Docker deployment.}
-
-\resumeItem{Integrated live airport and airline data sync from the AviationStack API into an admin analytics suite with CSV exports and a searchable audit trail.}
+\resumeItem{Integrated live flight and airport data from the AviationStack third-party API into an internal booking system, with automated sync logging and diagnostic checks to catch integration failures early.}
+\resumeItem{Designed a normalized 24-table MySQL schema with FK constraints and indexing to support a multi-role platform, including a dedicated Admin Operations Center for internal staff.}
+\resumeItem{Hardened the application with prepared statements against SQL injection, CSRF validation, bcrypt password hashing, and session management.}
 
 \end{itemize}
 
 \end{itemize}
 \vspace{-5pt}
 
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
-
-\begin{itemize}[
-leftmargin=0.13in,
-label={},
-itemsep=1pt,
-topsep=0pt,
-parsep=0pt,
-partopsep=0pt
-]
-
-\item{
-\textbf{Languages:} C++, Python, Java, PHP, JavaScript, SQL, HTML, CSS \\[2pt]
-\textbf{Frameworks \& Libraries:} FastAPI, Flask, Next.js, scikit-learn, Pandas, NumPy, XGBoost, CatBoost \\[2pt]
-\textbf{Databases:} PostgreSQL, MySQL, SQLite \\[2pt]
-\textbf{Tools:} Git, GitHub Actions, Docker, Docker Compose, pytest \\[2pt]
-\textbf{Deployment:} Render, Vercel, Gunicorn \\[2pt]
-\textbf{Concepts:} Data Structures \& Algorithms, OOP, DBMS, Operating Systems, Computer Networks, System Design, REST APIs, Authentication, Web Security, CI/CD, Machine Learning
-}
-
-\end{itemize}
-\vspace{-5pt}
-
-%-----------ACHIEVEMENTS-----------
-\section{Achievements}
+%-----------ACHIEVEMENTS & CERTIFICATIONS-----------
+\section{Achievements \& Certifications}
 
 \begin{itemize}[
 leftmargin=0.18in,
@@ -239,9 +231,10 @@ parsep=0pt,
 partopsep=0pt
 ]
 
-\resumeItem{Secured 2\textsuperscript{nd} rank in \textit{Code It}, a college-level duo-format coding competition with 40 teams competing in the final round.}
-
-\resumeItem{Led a team in the internal Smart India Hackathon round to build a College ERP System concept; owned system design, QA/testing, and project presentation after selection for the college-level demonstration round.}
+\resumeItem{\textbf{Competitive Programming:} Codeforces Pupil (1330) $|$ CodeChef 3-Star (1628) $|$ 600+ algorithmic problems solved across LeetCode, CodeChef, and Codeforces.}
+\resumeItem{\textbf{Hackathon Leadership:} Led team in internal Smart India Hackathon round to design a College ERP System; owned system architecture, automated test design, and the technical presentation.}
+\resumeItem{\textbf{Competitive Coding Rank:} Secured 2\textsuperscript{nd} rank in \textit{Code It}, a duo-format coding contest (40 teams in finals).}
+\resumeItem{\textbf{Certifications:} NPTEL Programming in Java (Elite, 94/100) $|$ NPTEL Cloud Computing (92/100) $|$ EduSkills AICTE Virtual Internships -- AI Deployment \& Automation (10 weeks), Prompt Engineering for AI (8 weeks), DevOps \& Cloud Automation (8 weeks).}
 
 \end{itemize}
 

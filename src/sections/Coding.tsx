@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { codingIntro, platforms, type Platform } from "../data/portfolio";
+import { BRAND_ICONS } from "../components/icons";
+import { Character } from "../components/character/Character";
 import { Container, Reveal, SectionHeading } from "../components/ui";
 
 /** Codeforces ratings move between deploys, so the card re-pulls the official
@@ -40,8 +42,6 @@ function useCodeforcesLive(handle: string, fallback: Platform["stats"]): Platfor
   }, [handle]);
   return stats;
 }
-import { BRAND_ICONS } from "../components/icons";
-import { Character } from "../components/character/Character";
 
 function TerminalScene() {
   return (

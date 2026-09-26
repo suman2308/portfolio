@@ -34,19 +34,19 @@ export const cpLive: Record<string, { label: string; value: string }[]> = {
   "leetcode": [
     {
       "label": "Solved",
-      "value": "78"
+      "value": "109"
     },
     {
       "label": "Easy",
-      "value": "30"
+      "value": "39"
     },
     {
       "label": "Medium",
-      "value": "40"
+      "value": "56"
     },
     {
       "label": "Hard",
-      "value": "8"
+      "value": "14"
     }
   ]
 };

@@ -17,8 +17,9 @@ public/
 └── certificates/                        # all certificates, named by content
     ├── NPTEL_Programming_In_Java_Elite.pdf
     ├── NPTEL_Cloud_Computing.pdf
-    ├── AI_Deployment_Automation_Internship.pdf        # Eduskill, Mar 2026
-    ├── Prompt_Engineering_AI_Internship.pdf           # Eduskill, Aug 2026
+    ├── AI_Deployment_Automation_Internship.pdf        # EduSkills AICTE, Jan–Mar 2026
+    ├── Prompt_Engineering_AI_Internship.pdf           # EduSkills AICTE, Apr–Jun 2026
+    ├── DevOps_Cloud_Automation_Internship.pdf         # EduSkills AICTE, Aug–Oct 2026
     ├── Python_Programming_Training_Ardent.pdf         # Ardent, ID ARDENT/133057
     ├── Generative_AI_Training_Ardent.pdf              # Ardent, ID ARDENT/192400
     └── MEAN_Full_Stack_Training_IALSD.pdf

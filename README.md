@@ -1,135 +1,191 @@
 # Suman Jash — Portfolio
 
-A premium, animated, fully responsive developer portfolio built with **React · Vite · TypeScript · Tailwind CSS · Motion** (plus three.js for the 3D lanyard card).
+A fast, animated, fully responsive single-page portfolio. Dark editorial design, an
+original illustrated character, a 3D lanyard ID card, and live competitive-programming
+stats that never go stale.
 
-Live: **https://portfolio-self-phi-13.vercel.app/**
+**Live:** https://portfolio-self-phi-13.vercel.app/
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| UI | React 19 + TypeScript (strict mode) |
+| Build | Vite 8 |
+| Styling | Tailwind CSS 4 (theme tokens, no config file) |
+| Animation | Motion 13 (`reducedMotion="user"`) |
+| 3D | three.js + @react-three/fiber (lazy-loaded chunk) |
+| Icons | lucide-react + inline brand SVGs (no icon-font payload) |
+
+No backend, no database, no API keys — the built site is fully static.
 
 ## Quick start
 
 ```bash
 npm install
-npm run dev      # local dev server
-npm run build    # refreshes live CP stats, then production build → dist/
-npm run preview  # preview the production build
+npm run dev        # local dev server
+npm run build      # refreshes live CP stats, then production build → dist/
+npm run preview    # serve the production build locally
 npm run typecheck
 ```
 
-> No Node.js installed? A project-local runtime lives in `.tooling/` (gitignored). Prefix commands with
-> `export PATH="$PWD/.tooling/node-v24.19.0-win-x64:$PATH"`.
+Requires Node ≥ 18. (No Node installed? A project-local runtime can live in
+`.tooling/` — gitignored — and be prepended to `PATH`.)
 
-## Filling in your content
+## Where the content lives
 
-**Everything the site shows lives in one file: `src/data/portfolio.ts`** (the only exception is the competitive-programming stats, which are generated into `cp-live.ts` — see below).
+**Everything the site shows is edited in one file: `src/data/portfolio.ts`.**
 
-- `profile` — name, roles, tagline, location, email, resume link, links, bio, focus areas, achievements
-- `profile.educationList` — school, degree, years and location for the Education block in About
-- `heroImage` — path to your portrait in `public/images/` (e.g. `/images/hero.webp`; the original sources live in `/originals`)
-- `stats` — experience, projects, problems solved, certifications (strings render as-is)
-- `heroMarquee` / `heroChips` — marquee words and floating chips in the Hero
-- `projects` — the case studies (ShetBhav, CourierAI, AeroBook): `tagline`, `problem`, `result`, `features`, `tech`, `github`/`demo` links, `domain` (shown in the browser-frame URL bar), `ai` (shows the AI/ML core badge) and `image`. Adding a fourth project is just a new entry — the section renders any number of cards.
+- `profile` — name, roles, tagline, location, contact, bio, education, achievements
+- `heroImage` — portrait shown on the lanyard card (originals kept in `/originals`)
+- `stats` — the four About-section numbers (experience, projects, problems, certifications)
+- `heroMarquee` / `heroChips` — marquee words and floating skill chips
+- `projects` — the case studies (ShetBhav, CourierAI, AeroBook): problem → highlights →
+  result, tech, GitHub/demo links, screenshot, and an AI/ML badge flag
 - `skills` — categorized skill groups
-- `platforms` — competitive programming profiles (handle, URL). **The stats come from `cp-live.ts`** — see below.
-- `certifications` — certificates with issuer, year and verification URL
+- `platforms` — competitive-programming handles (numbers come from `cp-live.ts`, below)
+- `certifications` — title, issuer, year, detail line, and verification link
+
+Adding a fourth project or a ninth certificate is just a new entry — the sections render
+any number of cards.
 
 ## Live competitive-programming stats
 
-The stats never go stale — two layers:
+The Coding section shows Codeforces, CodeChef and LeetCode numbers in two layers:
 
-1. **Build time** — `scripts/fetch-cp-stats.mjs` (npm's `prebuild` hook, so it runs automatically on `npm run build`) pulls the Coding-section numbers from the live sources and writes `src/data/cp-live.ts`:
+1. **Build time** — `scripts/fetch-cp-stats.mjs` (npm's `prebuild` hook) pulls each
+   platform and writes `src/data/cp-live.ts`:
    - **Codeforces** — official JSON API (rating, max rating, rank)
    - **LeetCode** — public GraphQL profile (solved counts by difficulty)
    - **CodeChef** — no public API, so it best-effort scrapes the profile page
 
-   Every platform falls back to its previous values if its source is unreachable, so a failed fetch never breaks the build. To refresh manually without a full build: `npm run cp-stats`.
+   Each platform falls back to its previous values if its source is unreachable, so a
+   failed fetch never breaks the build. Refresh manually anytime with `npm run cp-stats`.
 
-2. **In the browser** — the Codeforces card additionally re-pulls the official API from the visitor's browser (Codeforces sends CORS `*`), so the rating is current even between deploys. If the request fails or is slow (>8s), the card silently keeps the build-time values.
+2. **In the browser** — the Codeforces card additionally re-pulls the official API from
+   the visitor's browser (Codeforces sends CORS `*`), so the rating stays current even
+   between deploys. On failure or after 8s it silently keeps the build-time values.
 
-To point the script at different profiles, edit the `HANDLES` map at the top of `scripts/fetch-cp-stats.mjs`.
+To point the script at different profiles, edit the `HANDLES` map at the top of
+`scripts/fetch-cp-stats.mjs`.
+
+## Certificates
+
+All eight verification PDFs live in `public/certificates/` and are linked from the
+Certifications section. The three EduSkills AICTE virtual internships are:
+
+| Program | Duration | Window | Credential ID |
+|---|---|---|---|
+| AI Deployment & Automation | 10 weeks | Jan – Mar 2026 | `42C2841CCB3EE00CF2BB` |
+| Prompt Engineering for AI | 8 weeks | Apr – Jun 2026 | `4EF6BBA5772AB76A234E` |
+| DevOps & Cloud Automation | 8 weeks | Aug – Oct 2026 | `41FBB98CD82AE33A3E65` |
+
+To add or replace a certificate: drop the PDF in `public/certificates/` (named by
+content) and add/ edit the entry in `certifications` in `src/data/portfolio.ts`.
 
 ## Images & assets
 
-Place images in `public/images/` and reference them as `/images/…`. Details — including the originals/optimization history and how the hero photo becomes the lanyard card's front face — are in [`public/images/README.md`](public/images/README.md).
+Site images live in `public/images/` (optimized WebP) and are referenced as
+`/images/…`. The asset map, originals/optimization history, and how the hero photo
+becomes the lanyard card's front face are documented in
+[`public/images/README.md`](public/images/README.md).
 
 ## Resume
 
-`public/resume/Suman_Jash_Resume.pdf` is compiled from its LaTeX source, `public/resume/Suman_Jash_Resume.tex` (edit the `.tex`, then recompile). A project-local tectonic build lives in `.tooling/tectonic/` — the two pdfTeX-only lines (`\input{glyphtounicode}`, `\pdfgentounicode=1`) are stripped for the XeTeX build:
+`public/resume/Suman_Jash_Resume.pdf` is compiled from the LaTeX source next to it,
+`Suman_Jash_Resume.tex` — edit the `.tex`, then recompile (any XeTeX engine, e.g.
+tectonic, works; the two pdfTeX-only lines `\input{glyphtounicode}` and
+`\pdfgentounicode=1` must be stripped for XeTeX):
 
 ```bash
-cd .tooling/resume-build
-grep -vE 'input\{glyphtounicode\}|pdfgentounicode=1' resume.tex > resume-xetex.tex
-../tectonic/tectonic.exe -X compile resume-xetex.tex
-cp resume-xetex.pdf ../../public/resume/Suman_Jash_Resume.pdf
+grep -vE 'input\{glyphtounicode\}|pdfgentounicode=1' Suman_Jash_Resume.tex > resume-xetex.tex
+tectonic resume-xetex.tex
+cp resume-xetex.pdf Suman_Jash_Resume.pdf
 ```
-
-(Resume build input is `resume.tex` — copy the edited `.tex` there first.)
 
 ## Structure
 
 ```
-index.html                  metadata (SEO/OG/Twitter/JSON-LD) + font loading
+index.html                  metadata (SEO/OG/Twitter/JSON-LD Person schema) + fonts
 scripts/
   fetch-cp-stats.mjs        build-time live CP stats fetcher (prebuild hook)
 public/
-  images/                   optimized WebP images (+ README with the asset map)
+  certificates/             the 8 verification PDFs linked from Certifications
+  images/                   optimized WebP/JPG assets (+ README asset map)
   resume/                   resume PDF + LaTeX source
-  certificates/             verification PDFs linked from the Certifications section
   robots.txt, favicon.svg
 src/
   components/               Nav, Hero, Marquee, icons, shared UI primitives
-  components/character/     Character.tsx — the site's illustrated signature (poses + head cameo)
-  components/effects/       LightFall, SplashCursor, SplitText, FoldText, Lanyard (3D, lazy chunk)
+  components/character/     Character.tsx — the site's illustrated signature
+  components/effects/       LightFall, SplashCursor, SplitText, FoldText, Lanyard (3D)
   sections/                 About, Projects, Skills, Coding, Certifications, Connect
-  data/                     portfolio.ts — all site content; cp-live.ts — generated live CP stats
+  data/
+    portfolio.ts            ← all site content (edit here)
+    cp-live.ts              ← generated live CP stats (do not edit by hand)
   lib/anim.ts               shared easing curve
   index.css                 design system (theme tokens, keyframes, reduced motion)
-originals/                  un-compressed source images (kept in the repo for re-deriving; never in the build output)
+originals/                  un-compressed source images for re-deriving (never built)
 ```
 
 ## Deploying
 
-The build is a plain static site — `npm run build` outputs to `dist/` and it can be hosted anywhere (Vercel, Netlify, GitHub Pages, Render).
+`npm run build` outputs a fully static site to `dist/` — host it anywhere (Vercel,
+Netlify, GitHub Pages, Render).
 
-> The production site URL lives in `index.html` (canonical, Open Graph/Twitter image URLs, and the JSON-LD Person schema). It's currently `https://portfolio-self-phi-13.vercel.app/` — update all references there if the domain ever changes.
-
-For a **GitHub Pages project page** (`username.github.io/repo/`), set the base path first:
-
-```bash
-npx vite build --base=/repo-name/
-```
-
-(For `username.github.io` root pages, or Netlify/Render/Vercel, the default `/` base is correct.)
-
-> On Vercel, make sure **Deployment Protection is off** (Project → Settings → Deployment Protection) so recruiters — and the og:image crawler — can reach the site.
+- The production URL is baked into `index.html` (canonical, Open Graph/Twitter image
+  URLs, JSON-LD). It's currently `https://portfolio-self-phi-13.vercel.app/` — update
+  all references there if the domain ever changes.
+- GitHub Pages project page? Build with a base path first:
+  `npx vite build --base=/repo-name/` (root pages and other hosts use the default `/`).
+- On Vercel, keep **Deployment Protection off** (Project → Settings → Deployment
+  Protection) so recruiters — and the og:image crawler — can reach the site.
 
 ## Security & hygiene
 
-- **Static site** — no backend, no database, no environment secrets in the codebase (`process.env` / `import.meta.env` are unused). The only runtime API call is the public, keyless Codeforces user endpoint (CORS-open) plus the build-time stats fetch.
-- **`npm audit` — 0 vulnerabilities** on all dependencies.
-- No `dangerouslySetInnerHTML`, `eval`, or dynamic `innerHTML`; all data renders as plain text via React.
-- Public assets (resume, certificates, project screenshots) contain only public information already shared on LinkedIn/GitHub.
-- `.gitignore` covers `node_modules`, `dist`, `.tooling`, `.env*`, and editor files — secrets can't be committed accidentally.
+- **Static site** — no backend, no database, no environment secrets (`process.env` /
+  `import.meta.env` are unused). The only runtime API call is the public, keyless
+  Codeforces user endpoint (CORS-open), plus the build-time stats fetch.
+- No `dangerouslySetInnerHTML`, `eval`, or dynamic `innerHTML`; all data renders as
+  plain text via React.
+- Public assets (resume, certificates, screenshots) contain only information already
+  public on LinkedIn/GitHub.
+- `.gitignore` covers `node_modules`, `dist`, `.tooling`, `.env*`, and editor/OS files —
+  secrets can't be committed accidentally.
 
 ## Character & visual identity
 
-The portfolio has an original illustrated **character** (`src/components/character/Character.tsx`) — a smart, young, cool version of Suman in **black wayfarer sunglasses**, with a styled haircut that frames the face, a youthful angular jaw, a relaxed confident mouth, a light-blue shirt and an understated ID card on a lanyard that echoes the Hero's hanging card. The face is the identity and stays pixel-identical everywhere; only the pose changes:
+The portfolio's signature is an original illustrated **character**
+(`src/components/character/Character.tsx`) — a smart, young version of Suman in black
+wayfarer sunglasses, with a styled haircut, light-blue shirt and an ID card on a
+lanyard echoing the Hero's 3D card. The face is the identity and stays pixel-identical
+everywhere; only the pose changes:
 
-- **Hero** — a small `CharacterHead` peeks beside the hanging ID card
-- **About** — relaxed, arms crossed, over a `> whoami` terminal card
-- **Projects** — every case study is stamped "Signed & shipped" with the character head
-- **Coding** — the character sits at a `solve.py` terminal scene, focused over a laptop
+- **Hero** — the head peeks beside the hanging card
+- **About** — arms crossed, over a `> whoami` terminal card
+- **Projects** — every case study is stamped "Signed & shipped"
+- **Coding** — focused over a laptop at a `solve.py` terminal
 - **Skills** — a small "the toolbelt" cameo
-- **Connect** — a natural farewell wave
+- **Connect** — a farewell wave
 
-Three poses are available (`relaxed`, `laptop`, `wave`) via the `pose` prop; `CharacterHead` is the head-only cameo. Both honor `prefers-reduced-motion` (the gentle bob stops). The favicon is the character's face with the black sunglasses.
+Three poses (`relaxed`, `laptop`, `wave`) plus the head-only `CharacterHead`. The
+favicon is the character's face.
 
 ## Design notes
 
-- Dark, minimal, technical aesthetic — warm ember-orange accent with amber/cream supports, editorial serif italic touches, film grain, hairline grid.
-- Scroll-driven Hero: layered typography (split-character entrance), a 3D **lanyard ID card** (photo front, branded back, striped band, pendulum physics + cursor sway) built with three.js and react-three-fiber and lazy-loaded into its own chunk, LightFall streak background, cycling side words, marquee, and the character peek.
-- Projects are **case studies**: each card carries PROBLEM → HIGHLIGHTS → RESULT blocks inside a browser-frame preview, an AI/ML badge where relevant, and the character's signature.
-- Cursor: warm ember trail (**SplashCursor**) with a hue range from orange to gold.
-- Custom canvas effects: **LightFall** (falling light streaks in the Hero) and **SplashCursor** (ember trail following the pointer) — both disabled on touch devices.
-- Text animation: **SplitText** (character stagger) in the Hero, **FoldText** (3D paper-unfold with crease shading) for every section heading.
-- `prefers-reduced-motion` is honored globally (Motion `reducedMotion="user"` + CSS overrides + components rendering static frames; SplashCursor fully disabled; the Lanyard renders a static frame).
-- Mouse parallax / tilt / cursor effects are disabled for touch devices and reduced-motion users.
-- No horizontal overflow; layout adapts (not shrinks) across desktop → small mobile.
+- Dark, minimal, technical aesthetic — warm ember-orange accent, editorial serif-italic
+  touches, film grain, hairline grid.
+- Scroll-driven Hero: split-character name entrance, the 3D **lanyard ID card** (photo
+  front, branded back, striped band, damped pendulum physics + cursor sway) built with
+  three.js/react-three-fiber and lazy-loaded into its own chunk, LightFall streak
+  background, cycling side words, marquee.
+- Projects are **case studies** — PROBLEM → HIGHLIGHTS → RESULT inside a browser-frame
+  preview, with an AI/ML badge where relevant.
+- Cursor: warm ember trail (SplashCursor); custom canvas **LightFall** streaks in the
+  Hero — both disabled on touch devices.
+- **Accessibility:** skip-link, semantic landmarks, `aria` labels on icon buttons,
+  keyboard-dismissable mobile menu (Escape), focus-visible outlines, WCAG-AA-checked
+  text contrast, and global `prefers-reduced-motion` support (Motion
+  `reducedMotion="user"` + CSS overrides; effects render static frames; SplashCursor is
+  fully disabled; the Lanyard renders a static frame).
+- No horizontal overflow at any breakpoint — layouts adapt rather than shrink, verified
+  from 360 px phones to wide desktop.
